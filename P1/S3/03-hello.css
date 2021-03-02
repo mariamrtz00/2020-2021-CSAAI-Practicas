@@ -15,5 +15,10 @@ h1 {
 /* Estilo para los párrafos */
 p {
   color: blue;
-  background-color: rgb(146, 127, 113);
+  background-color: rgb(105, 223, 94);
+}
+/* Este tiene más prioridad*/
+#especial { 
+    background-color: rgb(253, 163, 121);
+    color: rgb(230, 184, 230);
 }
