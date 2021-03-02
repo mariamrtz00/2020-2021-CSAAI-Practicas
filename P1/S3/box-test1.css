@@ -1,0 +1,19 @@
+/* Ponemos a cero todas las propiedades del cuerpo */
+/* Sin marge, sin relleno y sin borde              */
+body {
+  padding: 5px;  /* deja un pequeño margen entre la caja body y la subcaja p */
+  margin: 10px; /* para separar una caja de un parrafo de la otra */
+  border: solid; /* si no quiero caja pongo aquí none y no pongo la siguiente linea */
+  border-color: darkseagreen;
+}
+
+/*  Propiedades de la caja del párrafo
+    Ponemos todo a cero, pero activamos el borde
+    para verlo. Y lo ponemos de color azul
+*/
+p {
+  margin: 10px; /* margen entre párrafos */
+  padding:10px; /* relleno */
+  border:solid;
+  border-color: blue;
+}
