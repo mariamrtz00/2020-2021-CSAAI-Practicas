@@ -1,0 +1,14 @@
+body {
+  background-color: lightblue;
+  color:black;
+}
+
+/* los q pertenezcan a ,i grupo */
+.migrupo {
+  background-color: blue;
+  color: white
+}
+
+p {
+  background-color: orange;
+}
