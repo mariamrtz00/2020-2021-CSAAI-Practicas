@@ -1,0 +1,29 @@
+<!-- Ejemplo 1: Código javascript empotrado en las
+     etiquetas de HTML -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejempo 1</title>
+</head>
+<body>
+
+    <!-- Párrafo. Al pulsar en el texto se ejecuta
+         el código javascript indicado en el atributo onclick
+     si el usuario hace click en el parrafo le dices que no es un botón -->
+    <p onclick="console.log('Pulsado sobre Párrafo'); window.alert('Hasta que no pulse ok no puede seguir')">
+      Párrafo. ¡Haz click sobre mi!
+    </p>
+
+    <!-- Enlace: Al pulsar el enlace se ejecuta el código javascript 
+         indicado en el atributo href -->
+    <a href="javascript:console.log('Pulsado sobre el enlace');">
+         Enlace: Haz click sobre mi!!
+    </a>
+</body>
+</html>
+
+<!-- no se debe hacer de esta forma, en google no se ve nada, para ver algo hay que abrir la consola-->
