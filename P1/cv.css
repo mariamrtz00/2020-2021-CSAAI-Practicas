@@ -1,17 +1,14 @@
 div.imagen{
-    border-radius: 20px;
+   /* imegen del título */
     padding: 10px;
-    background-image: url("nu.jfif");
-    box-shadow: 10px 10px 5px grey;
+    background-image: url("d.jpg");
+    width: 97%;
+    
   }
   
   
   div.tit{
-      
-    border-radius: 20px;
-    padding: 10px;
-    margin: 20px;
-    background-color: #ebe6e6dc;
+    margin: 30px;
 
   }
  
@@ -19,20 +16,28 @@ div.imagen{
      /* caja para sobre mí */
     float: left;
     text-align: center;
-    width: 30%;
+    width: 30%; 
     border-radius: 30px ; /* esquinas más o menos circulares */
     background-color: rgba(210, 168, 235, 0.55);
+    outline-style: solid;
+    outline-color: black;
+    outline-offset: -10px; /* para que la línea negra quede por dentro de la caja*/
+    margin: 10px; /* margen con la caja de la columna derecha*/
+    
   }
 .margen{
+   /* letra columna izquierda */
     margin: 25px;
+    font-size: 15px;
 }
  .subrayado {
+    /* subrayado caja izquierda */
     font-family: cursive;
-  text-decoration: underline rgb(206, 65, 187);
-  font-size: 15px;
-  color: black;
-  text-align: left;
-  margin: 25px;
+   text-decoration: underline rgb(206, 65, 187);
+   font-size: 15px;
+   color: black;
+   text-align: left;
+   margin: 25px;
  }
 
  .titulos{
@@ -44,43 +49,50 @@ div.imagen{
  
  .letra_columna_dcha{
     font-size: 15px;
-    color: black;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
-    margin: 16px;
+    margin: 20px;
  
  }
  div.columna_dcha{
     /* caja para la columna derecha */
    float: left;
-   border-top: 45px;
+   border-top: 25px;
    text-align: center;
-   width: 70%;
+   width: 60%;
    border-radius: 30px ;
    background-color: rgba(141, 231, 114, 0.55);
+   margin: 10px;
+   outline-style: solid;
+   outline-color: black;
+   outline-offset: -10px;
 
  }
  .centro{
-    /* caja para la columna derecha */
+    /* caja para la caja 1 del centro*/
    float: left;
    border-top: 45px;
    text-align: center;
    width: 100%;
    border-radius: 30px ;
    background-color: rgba(137, 194, 238, 0.55);
+   margin: 10px;
+   outline-style: solid;
+   outline-color: black;
+   outline-offset: -15px;
 
  }
  .letra_experienciaprof{
-    font-size: 15px;
+    font-size: 18px;
     color: black;
-    font-family: fantasy;
+    font-family: sans-serif;
     text-align: center;
     margin: 16px;
  }
 
 body {
     /* fondo */
-    background-image: url(disney.jpg);
+    background-image: url(fond.jpg);
     background-position: center center;
     background-size: cover;
 }
@@ -92,11 +104,14 @@ body {
     width: 100%;
     border-radius: 30px ;
     background-color: rgba(235, 203, 100, 0.55);
+    outline-style: solid;
+   outline-color: black;
+   outline-offset: -15px;
 }
 div.tamaño{
+   /* 'Mi actu más famosa ' */
     font-size: 50px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: sans-serif;
     text-align: center;
     margin: 16px;
  }
-}
