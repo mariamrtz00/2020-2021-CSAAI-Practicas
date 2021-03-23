@@ -80,7 +80,7 @@ suma.onclick = (ev) => {
 }
 
 //-- Evaluar la expresion
-igual.onclick = () => { // aquñi también habrá que poner un if para que solo haya igual cuando OP2 o algo asú
+igual.onclick = () => { // aqui también habrá que poner un if para que solo haya igual cuando OP2 o algo asú
   
     //-- Calcular la expresión y añadirla al display
     display.innerHTML = eval(display.innerHTML); 
