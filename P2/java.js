@@ -1,10 +1,31 @@
 console.log("Ejecutando JS...");
 
-display = document.getElementById("display")
-suma = document.getElementById("suma")
-igual = document.getElementById("igual")
-clear = document.getElementById("clear")
-deleete = document.getElementById("delete")
+display = document.getElementById("display") 
+// suma = document.getElementById("suma") 
+igual = document.getElementById("igual") 
+clear = document.getElementById("clear") 
+deleete = document.getElementById("delete") 
+coma = document.getElementById("coma") 
+
+// variable dígitos
+let digitos = document.getElementsByClassName("operador"); // todos los números del 0-9
+
+for (i=0; i<digitos.length; i++){
+    digitos[i].inclick = (ev) => {
+        numero(ev.target.value); // llamada a la funcion numero(boton)
+    }
+}
+
+let operator = document.getElementsByClassName("operando");
+
+for (i=0; i<operator.length; i++){
+    operator[i].onclick = (ev)=>{
+    if(estado == ESTADO.OP1){
+        display.innerHTML += ev.target.value;
+        estado = ESTADO.OPERATION;
+    }}
+}
+
 
 //-- Estados de la calculadora
 const ESTADO = {
@@ -13,89 +34,48 @@ const ESTADO = {
     OPERATION: 2,
     OP2: 3
 }
- 
+
  //-- Variable de estado de la calculadora
  //-- Al comenzar estamos en el estado incial
- let estado = ESTADO.INIT;   
+ let estado = ESTADO.INIT; 
 
-// Función de retrollamada de todos los botones de los digitos
-function digito(ev)
-{
+ // Función de retrollamada de todos los botones de los digitos
+function numero(boton){
+
     //-- Se ha recibido un dígito
     //-- Según en qué estado se encuentre la calculadora
     //-- se hará una cosa u otra
-
+    
     //-- Si es el primer dígito, no lo añadimos,
     //-- sino que lo mostramos directamente en el display
-    if (estado == ESTADO.INIT) {
-        // si estoy en el estado inicial
-        // me llega un dígito, lo meto y paso al siguiente estado
-        display.innerHTML = ev.target.value;
 
+    if (estado == ESTADO.INIT) {
+        display.innerHTML = boton;
         //-- Pasar al siguiente estado
         estado = ESTADO.OP1;
-
-    } else {
-       
-        //--En cualquier otro estado lo añadimos
-        display.innerHTML += ev.target.value;
-
-        //-- Y nos quedamos en el mismo estado
-        //-- Ojo! Este ejemplo sólo implementa el primer
-        //-- estado del diagrama. Habría que tener en 
-        //-- cuenta el resto... lo debes hacer en tu práctica
+    } else if (estado == ESTADO.OP1 ||estado == ESTADO.OP2) {
+        display.innerHTML += boton;
+    } else if (estado == ESTADO.OPERATION) {
+        display.innerHTML += boton;
+        //-- Pasar al siguiente estado
+        estado = ESTADO.OP2;
     } 
-    
+    // NO PUEDO USAR TARGET VALUE PORQUE LO HE QUITADO DEL HTML
+
 }
 
-
-//-- Obtener una colección con todos los elementos
-//-- de la clase digito
-digitos = document.getElementsByClassName("digito") 
-
-//-- Establecer la misma función de retrollamada
-//-- para todos los botones de tipo dígito
-for (let boton of digitos) { // para cada boton me llamas a la funcion digito
-
-    //-- Se ejecuta cuando se pulsa un boton
-    //-- que es un dígito. Para que el código sea 
-    //-- mas legible la función de retrollamada se
-    //-- escribe como una función normal (digito)
-    boton.onclick = digito;
-}
-
-//-------- Resto de funciones de retrollamada
-
-//-- Operación de sumar
-suma.onclick = (ev) => {
-
-    //-- Insertar simbolo de sumar
-    display.innerHTML += ev.target.value; 
-
-    //-- ¡Ojo! Aquí se inserta el + siempre!
-    //-- Para que la calculadora funcione bien
-    //-- sólo se debe permitir insertar el operador
-    //-- en el estado OP1, y debe cambiar el estado
-    //-- a OPERATION (según el diagrama de estados)
-  
-}
-
-//-- Evaluar la expresion
-igual.onclick = () => {  
-
-    if (estado == ESTADO.OP1 || estado == ESTADO.OP2){
-         //-- Calcular la expresión y añadirla al display
-        display.innerHTML = eval(display.innerHTML); 
-        console.log("igual")
-        estado = ESTADO.OP1
-    } 
-}
-
-//-- Poner a cero la expresion
-//-- Y volver al estado inicial
 clear.onclick = () => {
-  display.innerHTML = "0";
-  console.log("clear")
-  estado = ESTADO.INIT;
-}
+    display.innerHTML = "0";
+      console.log("clear");
+      estado = ESTADO.INIT;
+  }
 
+coma.onclick = (ev) => {
+    if(ESTADO.COMA){
+      console.log("No se pueden poner dos comas seguidas");
+    }else{
+      display.innerHTML += ev.target.value;
+      ESTADO.COMA = true;
+    }
+  }
+  

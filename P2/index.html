@@ -12,23 +12,49 @@
     
     <h1> CASIO </h1>
 
-    <div class="botones_calcu">
+    <div class="calculadora">
 
-      <p id="display">0</p>
-      <button type="button" id="boton1" value="1" class="digito">1</button> <!-- hemos agrupado en la clase digito todos los valores que son digitos, en mi calculadora serán 10 de 0 a 9-->
-      <button type="button" id="boton2" value="2"  class="digito">2</button>
-      <button type="button" id="suma" value="+">+</button>
-      <br>
-      <button type="button" id="clear">AC</button>
-      <button type="button" id="igual">=</button>
-      <button type="button" id="deleete">c</button>
+      <div class="display">
+        <p id="display">0</p>
+      </div>
+
+<!-- el type no se para que vale y lo he quitado-->
+      <div class="primera fila">
+        <button class="operando" value="+">+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
+        <button class="operando" value="-" >-</button>
+        <button class="operando" value="*">x</button>
+        <button class="operando" value="/" >/</button>
+      </div>
+
+      <div class="segunda fila">
+        <button class="operador" value="1" >1</button>
+        <button class="operador" value="2" >2</button>
+        <button class="operador" value="3" >3</button>
+        <button class="operando" value="**">^</button>
+      </div>
+
+      <div class="tercera fila">
+        <button class="operador" value="4" >4</button>
+        <button class="operador" value="5" >5</button>
+        <button class="operador" value="6" >6</button>
+      <!--  <button class="operando" value="e" >e</button> -->
+      <!-- poner aquí el AC o algun botón adiccional -->
+      </div>
+
+      <div class="cuarta fila">
+        <button class="operador" value="7" >7</button>
+        <button class="operador" value="8" >8</button>
+        <button class="operador" value="9" >9</button>
+        <button class="operador" value="0">0</button>
+      </div>
+
+      <div class="quinta fila">
+        <button id="clear" value="0">AC</button>
+        <button id= "delete" value="DEL"><img src="flecha.png" alt="flecha"></button>
+        <button id= "igual">=</button>
+        <button id= "coma" value="." >.</button>
+      </div>
 
     </div>
-
-    
-
-
-
-
   </body>
 </html>
