@@ -1,7 +1,6 @@
 console.log("Ejecutando JS...");
 
-display = document.getElementById("display") 
-// suma = document.getElementById("suma") 
+display = document.getElementById("display")  
 igual = document.getElementById("igual") 
 clear = document.getElementById("clear") 
 deleete = document.getElementById("delete") 
@@ -13,6 +12,8 @@ const ESTADO = {
     OP1: 1,
     OPERATION: 2,
     OP2: 3,
+    COMA: false,
+
 }
 
 
@@ -22,44 +23,18 @@ const ESTADO = {
 
 
 // variable dígitos
-let digitos = document.getElementsByClassName("operador"); // todos los números del 0-9
+let digitos = document.getElementsByClassName("operador"); // array con todos los números del 0-9
 
+// Recorro el array de los digitos, i va de 0 a 9
 for (i=0; i<digitos.length; i++){
     digitos[i].onclick = (ev) => {
-        numero(ev.target.value) // llamada a la funcion numero(boton)
+    numero(ev.target.value); // llamada a la funcion numero(boton)
     }
 }
 
+let operator = document.getElementsByClassName("operando"); // array con todos los signos de operacion
 
- // Función de retrollamada de todos los botones de los digitos
-function numero(boton){
-
-    //-- Se ha recibido un dígito
-    //-- Según en qué estado se encuentre la calculadora
-    //-- se hará una cosa u otra
-    
-    //-- Si es el primer dígito, no lo añadimos,
-    //-- sino que lo mostramos directamente en el display
-
-    if (estado == ESTADO.INIT) {
-        display.innerHTML = boton;
-        estado = ESTADO.OP1;
-      }else if (estado == ESTADO.OP1){
-        display.innerHTML += boton;
-      }else if (estado == ESTADO.OPERATION) {
-        display.innerHTML += boton;
-        estado = ESTADO.OP2;
-      }else if (estado == ESTADO.OP2){
-        display.innerHTML += boton;
-      }
-    }
-    // NO PUEDO USAR TARGET VALUE PORQUE LO HE QUITADO DEL HTML
-
-
-
-
-let operator = document.getElementsByClassName("operando");
-
+// Recorro el array de los operadores,: sumar, restar, etc....
 for (i=0; i<operator.length; i++){
     operator[i].onclick = (ev)=>{
     if(estado == ESTADO.OP1){
@@ -68,27 +43,65 @@ for (i=0; i<operator.length; i++){
     }}
 }
 
-clear.onclick = () => {
+
+ // Función de retrollamada de todos los botones de los digitos
+function numero(boton){
+
+
+    if (estado == ESTADO.INIT) {
+        display.innerHTML = boton;
+        estado = ESTADO.OP1;
+        console.log(estado, ":Estado");
+      }else if (estado == ESTADO.OP1){
+        display.innerHTML += boton;
+        console.log(estado, ":Estado");
+      }else if (estado == ESTADO.OPERATION) {
+        display.innerHTML += boton;
+        estado = ESTADO.OP2;
+        console.log(estado, ":Estado");
+      }else if (estado == ESTADO.OP2){
+        display.innerHTML += boton;
+        console.log(estado, ":Estado");
+      }
+    }
+    // NO PUEDO USAR TARGET VALUE PORQUE LO HE QUITADO DEL HTML
+
+
+
+
+// Pone a cero el display
+
+clear.onclick = (ev) => {
     display.innerHTML = "0";
       console.log("clear");
       estado = ESTADO.INIT;
+      console.log(estado,"se borra todo");
   }
 
+// para no poner 2 comas seguidas
 coma.onclick = (ev) => {
     if(ESTADO.COMA){
-      console.log("No se pueden poner dos comas seguidas");
+      console.log("Error: No se pueden poner 2 comas seguidas");
     }else{
       display.innerHTML += ev.target.value;
       ESTADO.COMA = true;
     }
   }
 
-igual.onclick = () => {
-    console.log("no va?");
+igual.onclick = (ev) => {
+    console.log("//");
     console.log(estado);
-    if(estado == ESTADO.OP2){
+    if(estado == ESTADO.OP1 || estado == ESTADO.OP2 ){
       display.innerHTML = eval(display.innerHTML);
-      estado = ESTADO.OP2;
+      estado = ESTADO.OP1;
+      // no puedo volver a poner una coma si utilizo ans
       console.log(estado,"igual");
+
       }
     }
+
+// Borra el ultimo digito que haya en el display
+deleete.onclick = (ev) => {
+    display.innerHTML = display.innerHTML.slice(0,-1);
+    console.log("borra el último dígito")
+}
