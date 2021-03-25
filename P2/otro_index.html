@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="calcu.js" defer></script>
+    <title>Calculadora </title>
+</head>
+
+<body>
+
+
+    <h1> CASIO </h1>
+
+    <div class="calculadora">
+
+      <div class="display">
+        <p id="display">0</p>
+      </div>
+
+<!-- el type no se para que vale y lo he quitado-->
+      <div class="primera fila">
+        <button type="button" id="suma" value="+">+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
+        <button type="button" class="operando" value="-" >-</button>
+        <button type="button" class="operando" value="*">x</button>
+        <button type="button" class="operando" value="/" >/</button>
+      </div>
+
+      <div class="segunda fila">
+        <button type="button" class="operador" value="1" >1</button>
+        <button type="button" class="operador" value="2" >2</button>
+        <button type="button" class="operador" value="3" >3</button>
+        <button type="button" class="operando" value="**">^</button>
+      </div>
+
+      <div class="tercera fila">
+        <button type="button" class="operador" value="4" >4</button>
+        <button type="button" class="operador" value="5" >5</button>
+        <button type="button" class="operador" value="6" >6</button>
+      <!--  <button class="operando" value="e" >e</button> -->
+      <!-- poner aquí el AC o algun botón adiccional -->
+      </div>
+
+      <div class="cuarta fila">
+        <button type="button" class="operador" value="7" >7</button>
+        <button type="button" class="operador" value="8" >8</button>
+        <button type="button" class="operador" value="9" >9</button>
+        <button type="button" class="operador" value="0">0</button>
+      </div>
+
+      <div class="quinta fila">
+        <button type="button" id="clear" value="0">AC</button>
+        <button type="button" id= "delete" value="DEL"><img src="flecha.png" alt="flecha"></button>
+        <button type="button" id= "igual">=</button>
+        <button type="button" id= "coma" value="." >.</button>
+      </div>
+
+</body>
+</html>

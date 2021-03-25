@@ -43,18 +43,19 @@ function numero(boton){
 
     if (estado == ESTADO.INIT) {
         display.innerHTML = boton;
-        //-- Pasar al siguiente estado
         estado = ESTADO.OP1;
-    } else if (estado == ESTADO.OP1 ||estado == ESTADO.OP2 || estado == ESTADO.OPERATION) {
+      }else if (estado == ESTADO.OP1){
         display.innerHTML += boton;
-    } else if (estado == ESTADO.OPERATION) {
+      }else if (estado == ESTADO.OPERATION) {
         display.innerHTML += boton;
-        //-- Pasar al siguiente estado
         estado = ESTADO.OP2;
-    } 
+      }else if (estado == ESTADO.OP2){
+        display.innerHTML += boton;
+      }
+    }
     // NO PUEDO USAR TARGET VALUE PORQUE LO HE QUITADO DEL HTML
 
-}
+
 
 
 let operator = document.getElementsByClassName("operando");
