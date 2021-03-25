@@ -7,37 +7,29 @@ clear = document.getElementById("clear")
 deleete = document.getElementById("delete") 
 coma = document.getElementById("coma") 
 
-// variable dígitos
-let digitos = document.getElementsByClassName("operador"); // todos los números del 0-9
-
-for (i=0; i<digitos.length; i++){
-    digitos[i].inclick = (ev) => {
-        numero(ev.target.value); // llamada a la funcion numero(boton)
-    }
-}
-
-let operator = document.getElementsByClassName("operando");
-
-for (i=0; i<operator.length; i++){
-    operator[i].onclick = (ev)=>{
-    if(estado == ESTADO.OP1){
-        display.innerHTML += ev.target.value;
-        estado = ESTADO.OPERATION;
-    }}
-}
-
-
 //-- Estados de la calculadora
 const ESTADO = {
     INIT: 0,
     OP1: 1,
     OPERATION: 2,
-    OP2: 3
+    OP2: 3,
 }
+
 
  //-- Variable de estado de la calculadora
  //-- Al comenzar estamos en el estado incial
  let estado = ESTADO.INIT; 
+
+
+// variable dígitos
+let digitos = document.getElementsByClassName("operador"); // todos los números del 0-9
+
+for (i=0; i<digitos.length; i++){
+    digitos[i].onclick = (ev) => {
+        numero(ev.target.value) // llamada a la funcion numero(boton)
+    }
+}
+
 
  // Función de retrollamada de todos los botones de los digitos
 function numero(boton){
@@ -53,7 +45,7 @@ function numero(boton){
         display.innerHTML = boton;
         //-- Pasar al siguiente estado
         estado = ESTADO.OP1;
-    } else if (estado == ESTADO.OP1 ||estado == ESTADO.OP2) {
+    } else if (estado == ESTADO.OP1 ||estado == ESTADO.OP2 || estado == ESTADO.OPERATION) {
         display.innerHTML += boton;
     } else if (estado == ESTADO.OPERATION) {
         display.innerHTML += boton;
@@ -62,6 +54,17 @@ function numero(boton){
     } 
     // NO PUEDO USAR TARGET VALUE PORQUE LO HE QUITADO DEL HTML
 
+}
+
+
+let operator = document.getElementsByClassName("operando");
+
+for (i=0; i<operator.length; i++){
+    operator[i].onclick = (ev)=>{
+    if(estado == ESTADO.OP1){
+        display.innerHTML += ev.target.value;
+        estado = ESTADO.OPERATION;
+    }}
 }
 
 clear.onclick = () => {
@@ -78,4 +81,13 @@ coma.onclick = (ev) => {
       ESTADO.COMA = true;
     }
   }
-  
+
+igual.onclick = () => {
+    console.log("no va?");
+    console.log(estado);
+    if(estado == ESTADO.OP2){
+      display.innerHTML = eval(display.innerHTML);
+      estado = ESTADO.OP2;
+      console.log(estado,"igual");
+      }
+    }
