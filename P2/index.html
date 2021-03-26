@@ -9,51 +9,53 @@
     <script src="java.js" defer></script>
   </head>
   <body>
-    
-    <h1> CASIO </h1>
 
     <div class="calculadora">
 
+      <h1> CASIO </h1>
+      
       <div class="display">
         <p id="display">0</p>
       </div>
-
+      <div class = "teclas">
 <!-- el type no se para que vale y lo he quitado-->
-      <div class="primera fila">
-        <button class="operando" value="+">+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
-        <button class="operando" value="-" >-</button>
-        <button class="operando" value="*">x</button>
-        <button class="operando" value="/" >/</button>
-      </div>
+        <div class="primera_fila">
+          <button class="operando" value="+">+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
+          <button class="operando" value="-" >-</button>
+          <button class="operando" value="*">x</button>
+          <button class="operando" value="/" >/</button>
+        </div>
 
-      <div class="segunda fila">
-        <button class="operador" value="1" >1</button>
-        <button class="operador" value="2" >2</button>
-        <button class="operador" value="3" >3</button>
-        <button class="operando" value="**">^</button>
-      </div>
+        <div class="segunda_fila">
+          <button class="operador" value="1" >1</button>
+          <button class="operador" value="2" >2</button>
+          <button class="operador" value="3" >3</button>
+          <button class="operando" value="**">^</button>
+        </div>
 
-      <div class="tercera fila">
-        <button class="operador" value="4" >4</button>
-        <button class="operador" value="5" >5</button>
-        <button class="operador" value="6" >6</button>
+        <div class="tercera_fila">
+          <button class="operador" value="4" >4</button>
+          <button class="operador" value="5" >5</button>
+          <button class="operador" value="6" >6</button>
+          <button id= "coma" value="." >.</button>
 
-      <!--  <button class="operando" value="e" >e</button> -->
-      <!-- poner aquí el AC o algun botón adiccional -->
-      </div>
+        <!--  <button class="operando" value="e" >e</button> -->
+        <!-- poner aquí el AC o algun botón adiccional -->
+        </div>
 
-      <div class="cuarta fila">
-        <button class="operador" value="7" >7</button>
-        <button class="operador" value="8" >8</button>
-        <button class="operador" value="9" >9</button>
-        <button class="operador" value="0">0</button>
-      </div>
+        <div class="cuarta_fila">
+          <button class="operador" value="7" >7</button>
+          <button class="operador" value="8" >8</button>
+          <button class="operador" value="9" >9</button>
+          <button class="operador" value="0">0</button>
+        </div>
 
-      <div class="quinta fila">
-        <button id="clear" value="0">AC</button>
-        <button id= "delete" value="DEL"><img src="flecha.png" alt="flecha"></button>
-        <button id= "igual" value="=">=</button>
-        <button id= "coma" value="." >.</button>
+        <div class="quinta_fila">
+          <button id="clear" value="0">AC</button>
+          <button id= "delete" value="DEL"><img src="flecha.png" alt="flecha" width="40" height="40"></button>
+          <button id= "igual" value="=">=</button>
+          
+        </div>
       </div>
 
     </div>
