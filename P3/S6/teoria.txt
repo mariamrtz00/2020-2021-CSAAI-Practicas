@@ -1,0 +1,19 @@
+
+PROCESO PARA HACER ANIMACIONES:
+
+1. Actualizar las posiciones de los objetos
+2. Borrar la pantalla
+3. Pintar en la pantalla
+4. Repetir
+
+todo este proceso se deber realizar a 60 frames/sg (frecuencia 60 Hz) para garantizar que se vea bien
+siempre usaré como frecuencia de referencia 60Hz, lo qeu significa que el tiempo que tengo para realizar esos 4 pasos, son 17 ms (lo que más tiempo lleva son los calculos = paso 1)
+
+EJEMPLO: CALCULO DE LOS FRAMES POR SEGUNDO
+1. 10ms
+2. 4ms
+3. 6ms
+¿Cuál será la frecuencia de refresco? (fps) 
+Me pregunta a cuantos frames por segundo puede ir como másximo mi animación
+la suma me da 20ms, es el tiempo que se requiere para obtener cada frame
+1/20ms = 0.05Khz = 50Hz es la frecuencia de refresco, está por debajo por lo que la calidad se podría mejorar
