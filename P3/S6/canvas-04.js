@@ -18,11 +18,11 @@ ctx.beginPath();
     //-- Línea horizontal y vertical, unidas
     ctx.moveTo(10, 80);
     ctx.lineTo(150,80);
-    ctx.lineTo(150,20);
+    ctx.lineTo(190,40); // he cambiado de (150,30)
 
-    ctx.strokeStyle = 'blue';
+    ctx.strokeStyle = 'green'; //lineasd de collor verde
     //-- Cambiar el tamaño de la linea del trazo
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 1; // linea finita
 
     //-- Dibujar el trazo
     ctx.stroke()
