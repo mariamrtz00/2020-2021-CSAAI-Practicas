@@ -1,9 +1,9 @@
 
 PROCESO PARA HACER ANIMACIONES:
 
-1. Actualizar las posiciones de los objetos
-2. Borrar la pantalla
-3. Pintar en la pantalla
+1. Actualizar las posiciones de los objetos (cálculos)
+2. Borrar el canvas
+3. Pintar en la pantalla en las nuevas psociones
 4. Repetir
 
 todo este proceso se deber realizar a 60 frames/sg (frecuencia 60 Hz) para garantizar que se vea bien
@@ -17,3 +17,7 @@ EJEMPLO: CALCULO DE LOS FRAMES POR SEGUNDO
 Me pregunta a cuantos frames por segundo puede ir como másximo mi animación
 la suma me da 20ms, es el tiempo que se requiere para obtener cada frame
 1/20ms = 0.05Khz = 50Hz es la frecuencia de refresco, está por debajo por lo que la calidad se podría mejorar
+
+
+
+metodo requestAnimationFrame() para hacer la repetición creo que es
