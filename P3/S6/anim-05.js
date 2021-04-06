@@ -13,8 +13,10 @@ const ctx = canvas.getContext("2d");
 let x = 0;
 let y = 10;
 
-//-- Velocidad horizontal del objeto
+//-- Velocidades del objeto
+// se va a mover en diagonal, se moverá más rapido en horizontal que en vertical
 let velx = 3;
+let vely = 0.2;
 
 //-- Funcion principal de animacion
 function update() 
@@ -25,15 +27,16 @@ function update()
   //-- (física del movimiento rectilineo uniforme)
 
    //-- Condicion de rebote en extremos del canvas
-   if (x < 0 || x >= (canvas.width - 20) ) {
-       // si la posicion de x es menor que 0 o mayor que la anchura del canvas (quitando un poquito del borde antes de que desaparezca)
-       // 20 es la anchura del rectángulo (20 pixeles)
-       // rebote=> cambio de signo
+   if (x < 0 || x >= (canvas.width - 20) ) { 
     velx = -velx;
+    // está confinado horizontalmente pero no en vertical
   }
 
+
+  // en cada pasada, actualizamos tanto la componente x como la componente y
   //-- Actualizar la posición
   x = x + velx;
+  y = y + vely;
 
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
