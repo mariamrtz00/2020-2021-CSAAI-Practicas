@@ -18,6 +18,6 @@ ctx.fillText("Texo sólido", 10, 30); // interior del texto (10,20) son las coor
 
 //-- Texto trazo
 
-ctx.strokeStyle = 'blue'; // para hacer solo texto con contorno, la parte interior no sale
+ctx.strokeStyle = 'green'; // para hacer solo texto con contorno, la parte interior no sale
 ctx.font = "35px Arial";
 ctx.strokeText("Texto trazo", 5, 80);

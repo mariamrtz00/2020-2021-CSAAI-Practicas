@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+ <button onclick="test()">Click me</button>
+<p id="d"> holaa </p>
+</body>
+<head>
+<script>
+ var x = 0;
+ var d = document.getElementById('d')
+ function test() {
+ setInterval(()=>{
+ x += 1;
+ d.innerHTML = x;
+ }, 1000);
+ }
+</script> </head>
+</html>

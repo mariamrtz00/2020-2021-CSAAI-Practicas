@@ -1,5 +1,7 @@
 console.log("Ejecutando JS...");
 
+// con getElement cojo los elementos del HTML a partir de su identificador
+
 display = document.getElementById("display")  
 igual = document.getElementById("igual") 
 clear = document.getElementById("clear") 
@@ -8,6 +10,7 @@ coma = document.getElementById("coma")
 
 //-- Estados de la calculadora
 const ESTADO = {
+  // mi máquina tiene 4 estados, le doy números aleatorios 
     INIT: 0,
     OP1: 1,
     OPERATION: 2,
@@ -23,11 +26,12 @@ const ESTADO = {
 
 
 // variable dígitos
+// DOM por clase, antes era por id
 let digitos = document.getElementsByClassName("operador"); // array con todos los números del 0-9
 
 // Recorro el array de los digitos, i va de 0 a 9
 for (i=0; i<digitos.length; i++){
-    digitos[i].onclick = (ev) => {
+    digitos[i].onclick = (ev) => { // cada vez que cliqueo un dígito
     numero(ev.target.value); // llamada a la funcion numero(boton)
     }
 }
@@ -36,10 +40,10 @@ let operator = document.getElementsByClassName("operando"); // array con todos l
 
 // Recorro el array de los operadores,: sumar, restar, etc....
 for (i=0; i<operator.length; i++){
-    operator[i].onclick = (ev)=>{
-    if(estado == ESTADO.OP1){
-        display.innerHTML += ev.target.value;
-        estado = ESTADO.OPERATION;
+    operator[i].onclick = (ev)=>{ // cada vez que pulso sobre un operador
+    if(estado == ESTADO.OP1){ // si estoy en el primer estado (el siguiente será el operador)
+        display.innerHTML += ev.target.value;  // actualizo el displey AÑADIENDO el nuevo símbolo (no borro lo anterior)
+        estado = ESTADO.OPERATION; // he cambiado de estado (el siguiente será otro dígito)
     }}
 }
 
@@ -49,18 +53,18 @@ function numero(boton){
 
 
     if (estado == ESTADO.INIT) {
-        display.innerHTML = boton;
-        estado = ESTADO.OP1;
-        console.log(estado, ":Estado");
+        display.innerHTML = boton; // actualizo el display poniendo el dígito que haya pulsado
+        estado = ESTADO.OP1; // estoy en el estado 1
+        console.log(estado, ":Estado"); 
       }else if (estado == ESTADO.OP1){
-        display.innerHTML += boton;
+        display.innerHTML += boton; // por si el número tiene más de una cifra
         console.log(estado, ":Estado");
-      }else if (estado == ESTADO.OPERATION) {
+      }else if (estado == ESTADO.OPERATION) {// AÑADO EL SIGNO (+-*/) al dígito anterior
         display.innerHTML += boton;
-        estado = ESTADO.OP2;
+        estado = ESTADO.OP2; // paso al siguiente estado, necesitaré el siguiente dígito
         console.log(estado, ":Estado");
       }else if (estado == ESTADO.OP2){
-        display.innerHTML += boton;
+        display.innerHTML += boton; // añado el nuevo dígito
         console.log(estado, ":Estado");
       }
     }
