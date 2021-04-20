@@ -10,7 +10,33 @@ canvas.height = 400; // alto
 const ctx = canvas.getContext("2d"); // smp
 
 
-ctx.beginPath(); // para dibujar triángulos, círculos...
+
+
+// solo tiene que rebotar en las paredes, solo tengo que limitar la x
+
+let x = 0;
+let y = 0;
+
+let velx = 1;
+
+
+function update(){
+    console.log("test")
+    if (x < 0 || x >= (canvas.width - 20) ) {
+        // si la posicion de x es menor que 0 o mayor que la anchura del canvas (quitando un poquito del borde antes de que desaparezca)
+        // 20 es la anchura del rectángulo (20 pixeles)
+        // rebote=> cambio de signo
+     velx = -velx;
+   }
+ 
+   //-- Actualizar la posición
+   x = x + velx;
+ 
+   //-- 2) Borrar el canvas
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+   ctx.beginPath(); // para dibujar triángulos, círculos...
   
 // donde empieza x e y
 // domensiones largo y ancho
@@ -97,6 +123,8 @@ ctx.beginPath(); // para dibujar triángulos, círculos...
   ctx.fillStyle = 'yellow';
   ctx.fillStyle = 'pink'
 
+  ctx.strokeStyle = 'violet'; 
+  ctx.lineWidth = 2.0; 
   //-- Mostrar el relleno
   ctx.fill();
 
@@ -113,8 +141,8 @@ ctx.beginPath();
 
   //-- Color de relleno del rectángulo
   ctx.fillStyle = 'black';
-  ctx.strokeStyle = 'yellow'; /* líneas  */
-  ctx.lineWidth = 0.2; /* anchura lineas */
+  ctx.strokeStyle = 'yellow'; 
+  ctx.lineWidth = 0.2; 
   //-- Mostrar el relleno
   ctx.fill();
 
@@ -133,3 +161,9 @@ ctx.beginPath();
   
   ctx.fill();
 ctx.closePath();
+
+
+//-- 4) Volver a ejecutar update cuando toque
+requestAnimationFrame(update);
+}
+update()
