@@ -1,46 +1,49 @@
-// voy a poner como todo el escenario de pega
 console.log("Ejecutando JS...");
 
 const canvas = document.getElementById("canvas");
+const start = document.getElementById("start");
 
+//-- Definir el tamaño del canvas
 canvas.width = 255; // ancho
 canvas.height = 400; // alto
 
 //-- Obtener el contexto del canvas
-const ctx = canvas.getContext("2d"); // smp
+const ctx = canvas.getContext("2d");
 
-// limito las 4 paredes con margen para ver cuando choca
 
+//-- Coordenadas del objeto
 let x = 0;
-let y = 100;
+let y = 70;
 
-let velx = 3;
-let vely = 3;
+//-- Velocidad horizontal del objeto
+let velx = 1;
+let vely = 1;
 
-
-function update(){
-    console.log("test")
+//-- Funcion principal de animacion
+function update() 
+{
+    console.log("test");
+  
     if (x < 0 || x >= (canvas.width - 20) ) {
-        console.log("no se")
         velx = -velx;
     } 
-    if (y < 0 || y >= (canvas.height - 20) ) {
+    if (y < 0) {
         vely = -vely;
-    }
-    
-      //-- Actualizar la posición
-    x = x + velx;
-    console.log("hola")
-    y = y + vely;
- 
-   //-- 2) Borrar el canvas
-   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-   ctx.beginPath(); // para dibujar triángulos, círculos...
+    }
   
-        // donde empieza x e y
-        // domensiones largo y ancho
-        // defino los ladrillos, 10 columnas y 5 filas
+
+
+  //-- Actualizar la posición
+  x = x + velx;
+  y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
+
+  //-- 2) Borrar el canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  //-- Definir un rectangulo de dimensiones 100x50,
+  //-- cuya esquina superior izquierda está en (5,5)
         ctx.rect(5,5, 20, 10);
         ctx.rect(30,5, 20, 10);
         ctx.rect(55,5, 20, 10);
@@ -117,8 +120,6 @@ function update(){
         ctx.rect(180,95, 20, 10);
         ctx.rect(205,95, 20, 10); 
         ctx.rect(230,95, 20, 10);
-
-
         ctx.fillStyle = 'pink'
         ctx.strokeStyle = 'violet'; 
         ctx.lineWidth = 2.0; 
@@ -128,9 +129,8 @@ function update(){
         ctx.stroke();
     //ctx.closePath();
 
-
     ctx.beginPath();
-
+    
         ctx.rect(70,350, 40, 7); // base para que rebote la pelota
         // x= 70(donde empieza a dibujarse), y= 350 (el 0,0 está arriba a la izquierda)
         // grosor =7, largo=40
@@ -146,7 +146,6 @@ function update(){
         ctx.stroke();
     //ctx.closePath();
 
-
     ctx.beginPath();
     // pelotita
     // FALLO: NO ESTABA PONIENDO X E Y ENTONCES NO SE ACTUALIZA LA PELOTA CON LAS POSICIONES
@@ -160,11 +159,10 @@ function update(){
     ctx.closePath();
 
 
-    console.log("no llega o si llega")
-    //-- 4) Volver a ejecutar update cuando toque
-    requestAnimationFrame(update);
+  //-- 4) Volver a ejecutar update cuando toque
+  requestAnimationFrame(update);
 }
 
 
-
-update()
+// cuando pulse el boton start, empieza el juego
+start.onclick = update;
