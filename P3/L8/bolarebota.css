@@ -1,0 +1,14 @@
+canvas {
+    background-color: rgb(166, 235, 148);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+  }
+#puntos {
+  color: coral;
+  background-color: cornflowerblue;
+}
+#vidas {
+    color: coral;
+    background-color: cornflowerblue;
+}
