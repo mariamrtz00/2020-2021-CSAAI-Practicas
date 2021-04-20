@@ -178,11 +178,13 @@ function update()
 izq.onclick = () => {
     console.log('boton izquierda');
     // no sé como mover la raqueta 
+    xraq = xraq- 1;
 }
 
 dcha.onclick = () => {
     console.log("boton deracha");
     // no sé como mover la raqueta 
+    xraq = xraq+ 1;
 }
 
  // cuando pulse el boton start, empieza el juego 
