@@ -21,7 +21,7 @@ ctx.beginPath(); // para dibujar triángulos, círculos...
   ctx.rect(80,5, 20, 10);
   ctx.rect(105,5, 20, 10);
   ctx.rect(130,5, 20, 10);
-  ctx.rect(155,5, 20, 10);
+  ctx.rect(155,5, 20, 10); 
   ctx.rect(180,5, 20, 10);
   ctx.rect(205,5, 20, 10); 
   ctx.rect(230,5, 20, 10);
@@ -95,6 +95,7 @@ ctx.beginPath(); // para dibujar triángulos, círculos...
 
   //-- Color de relleno del rectángulo
   ctx.fillStyle = 'yellow';
+  ctx.fillStyle = 'pink'
 
   //-- Mostrar el relleno
   ctx.fill();
@@ -128,7 +129,7 @@ ctx.beginPath();
   ctx.arc(80, 335, 7, 0, 2 * Math.PI); 
   // radio = 7
 
-  ctx.fillStyle = 'green';
+  ctx.fillStyle = 'blue';
   
   ctx.fill();
 ctx.closePath();
