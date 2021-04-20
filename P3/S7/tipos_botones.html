@@ -1,0 +1,51 @@
+<!-- SEGUIMOS CON HTML
+veremos elementos que permiten la comunicación enetre el usuario y el js, como los botones por ejemplo
+ -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Ej-01.js" defer></script>
+    <title>Ejemplo 1: Botones</title>
+</head>
+<body>
+    <h2>Ej-1: Tipos de botones</h2>
+    <hr> <!-- hr es la l-inea horizontal esa que sale3 -->
+    <h3>Tipo Button</h3>
+    <p> <input type="button" value="Boton" id="button"> <span id="button-test">Test</span></p>
+<!-- es el botoón que ya conocemos --> <!-- span para meter un texto detrás del boton, es el que luego voy a cambiar de color cuando se pulse el botón -->
+
+
+    <h3>Tipo Checkbox</h3> <!-- con span salen todos en la misma línea -->
+    <p> <span id="c1_test">c1</span> <input type="checkbox" id="checkbox1" > 
+        <span id="c2_test">c2</span> <input type="checkbox" id="checkbox2"> </p>
+<!-- casillas de verificación -->
+
+
+    <h3>Tipo Radio</h3>
+    <!-- los botones tipo radio tienen qe estar agupados en un name para que 
+    solo pueda activar 1 una vez, si pertenecen a grupos distintos será distinto
+ y tengo que decir de cuales ellso es el que está inicialmetne activado, en este caso el primero -->
+    <p> <!-- todos pertenecen a grupo1, a cada boton le doy un valor (el que yo quiera) -->
+        b1 <input type="radio" name="grupo1" value=1 id="radio1" checked>
+        b2 <input type="radio" name="grupo1" value=2 id="radio2">
+        b3 <input type="radio" name="grupo1" value=3 id="radio3">
+        b4 <input type="radio" name="grupo1" value=4 id="radio4">
+    </p> <!-- solo hay un boton activo cada vez -->
+    <p id="radio_display"></p> <!--parrafo de display generico para mostrar el boton que tengo pulsado-->
+
+    
+    <hr>
+        
+</body>
+</html>
+
+<!-- 
+Todos los botones son elementos de entrada, en html las entradas se pueden poner como input y un type
+Recuerdo que el botón se puede poner con input type=button o con la forma anterior (etiqueta button)
+
+-->
