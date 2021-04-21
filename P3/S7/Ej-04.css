@@ -1,0 +1,10 @@
+/*
+   Clase color. Cambiar el color
+   del fondo
+*/
+
+/* selector asociado a la clase color, esto de color no es la clase del html, se hace desde el js
+ */
+.color {
+    background: lightblue;
+  }
