@@ -9,7 +9,7 @@ h1 {
 
 body {
 
-    background-image: url("pizarra.jpg");
+    background-image: url("pizza.jpg");
 }
 
 
@@ -21,6 +21,7 @@ body {
     border-radius: 20px; /* redondeo de las esquinas */
     border: 5px ridge; 
     border-color: rgba(87, 90, 89, 0.6);
+    background-image: url('fondo.jpg');
     text-align: center; 
     margin-top: 150px; /* espacio por encima de la calculadora */
     margin-right: auto; /* espacio dcha de la calculadora */
