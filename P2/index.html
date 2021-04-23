@@ -12,7 +12,7 @@
 
     <div class="calculadora">
 
-      <h1> CASIO </h1>
+      <h1> HP Calculator Pro </h1>
       
       <div class="display">
         <p id="display">0</p>
@@ -20,23 +20,25 @@
       <div class = "teclas">
 <!-- el type no se para que vale y lo he quitado-->
         <div class="primera_fila">
-          <button class="operando" value="+">+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
-          <button class="operando" value="-" >-</button>
+          
+          <button class="operando" value="+" id='color1'>+</button>  <!--tambien se puede hacer con id="suma" + suma.oneclick-->
+          <button class="operando" value="-" id='color2' >-</button>
           <button class="operando" value="*">x</button>
-          <button class="operando" value="/" >/</button>
+          <button class="operando" value="/" id='color4'>/</button>
+          <button class= "operando" value= "%" > %</button>
         </div>
 
         <div class="segunda_fila">
           <button class="operador" value="1" >1</button>
-          <button class="operador" value="2" >2</button>
+          <button class="operador" value="2" id='color5'>2</button>
           <button class="operador" value="3" >3</button>
           <button class="operando" value="**">^</button>
         </div>
 
         <div class="tercera_fila">
-          <button class="operador" value="4" >4</button>
-          <button class="operador" value="5" >5</button>
-          <button class="operador" value="6" >6</button>
+          <button class="operador" value="4" id='color6'>4</button>
+          <button class="operador" value="5" id='color10' >5</button>
+          <button class="operador" value="6" id='color7'>6</button>
           <button id= "coma" value="." >.</button>
 
         <!--  <button class="operando" value="e" >e</button> -->
@@ -45,15 +47,16 @@
 
         <div class="cuarta_fila">
           <button class="operador" value="7" >7</button>
-          <button class="operador" value="8" >8</button>
-          <button class="operador" value="9" >9</button>
+          <button class="operador" value="8" id='color1'>8</button>
+          <button class="operador" value="9" id='color8' >9</button>
           <button class="operador" value="0">0</button>
         </div>
 
         <div class="quinta_fila">
-          <button id="clear" value="0">AC</button>
-          <button id= "delete" value="DEL"><img src="flecha.png" alt="flecha" width="40" height="40"></button>
-          <button id= "igual" value="=">=</button>
+          <button id="clear" value="0" id='color10'>AC</button>
+          <button id= "delete" value="DEL" id='color9'><img src="flecha.png" alt="flecha" width="40" height="40"></button>
+          <button id= "igual" value="=" id='color8'>=</button>
+          
           
         </div>
       </div>
