@@ -1,4 +1,4 @@
-Ejericio
+Ejericio1
 Se tiene una señal de audio de ancho de banda de 8Khz que se muestrea a las frecuencias de 20Khz y a 40Khz. ¿Cual de las dos señales digitales tendrá más calidad? 
 ¿La de 20Khz o la de 40Khz? (suponiendo que no hay cuantificación)
 
@@ -7,3 +7,11 @@ El muestreo es obtener una señal discreta pero con precisión infinita (valores
 El ancho de banda significa que la frecuencia más alta que tiene es un tono de 8k
 Nyquist garantiza que la señal se puede reconstruir igual si muestreo a 16Khz sin perder nada de calidad
 Renta más 20Khz, con la de 40KHz no consigo mejor calidad, solo más datos
+
+Ejercicio2
+Una señal de audio se muestrea a una frecuencia de 1Khz y se usa un conversor A/D de 8 bits. ¿Cual es el bitrate del audio digital?
+
+Si la señal se ha muestreado a 1Khz sé por Nyquist que solo voy a poder reconstruir las señales que sean de 0.5Khz, pero esto no tiene que ver con el bit rate
+1Khz  1000 muestras por segundo 
+Cuantizamos utilizando 8 bits = 256 niveles
+8 * 1000 = 8000 bits/seg. No sé si la calidad es buena o mala porque tengo que tener en cuenta el contexto y aquí no lo sabemos
