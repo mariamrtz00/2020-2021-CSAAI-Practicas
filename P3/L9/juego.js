@@ -15,15 +15,21 @@ const ctx = canvas.getContext("2d");
 let x = 0;
 let y = 270;
 
-//-- Velocidad horizontal del objeto
-let velx = 1;
-let vely = 1;
+
+
+//-- Velocidades del objeto
+let velx = 1; // horiz
+let vely = 1; // verti
 
 //-- Funcion principal de animacion
-function update() 
-{
+// 1. Actualiza la posicion del elemento
+// 2. Borrar el canvas
+// 3. Pintaar en el canvas
+// se repite el proceso
+function update() {
     console.log("test");
   
+    // para que rebote en las paredes
     if (x < 0 || x >= (canvas.width - 20) ) {
         velx = -velx;
     } 
@@ -31,25 +37,24 @@ function update()
         vely = -vely;
 
     }
-    if (y> canvas.height - 20) {
-        x= xraq;
-        y= yraq;
-    }
+    //if (y> canvas.height - 20) {
+      //  x= xraq;
+        //y= yraq;
+    //}
   
 
+    //-- Actualizar la posición
+    x = x + velx;
+    y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
 
-  //-- Actualizar la posición
-  x = x + velx;
-  y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
+    //-- 2) Borrar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //-- 2) Borrar el canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+   //-- 3) A pintarrrr
 
-  let xraq = 0;
-  let yraq = 350;
-  ctx.beginPath();
-  //-- Definir un rectangulo de dimensiones 100x50,
-  //-- cuya esquina superior izquierda está en (5,5)
+    ctx.beginPath();
+    //-- Definir un rectangulo de dimensiones 100x50,
+    //-- cuya esquina superior izquierda está en (5,5)
         ctx.rect(5,5, 20, 10);
         ctx.rect(30,5, 20, 10);
         ctx.rect(55,5, 20, 10);
@@ -170,20 +175,17 @@ function update()
 }
 
 
+update();
 
 
+body = document.getElementsByTagName('body')[0]
 
-izq.onclick = () => {
-    console.log('boton izquierda');
-    // no sé como mover la raqueta 
-    xraq = xraq- 1;
-}
+//-- Funcion de retrollamada de tecla pulsada
+window.onkeydown = (e) => {
+  
+  //-- Comprobar si la tecla es un espacio
+  if (e.key == ' ') {
 
-dcha.onclick = () => {
-    console.log("boton deracha");
-    // no sé como mover la raqueta 
-    xraq = xraq+ 1;
-}
-
- // cuando pulse el boton start, empieza el juego 
-start.onclick = update;
+    //-- Cambiar la activación de la clase color
+    body.classList.toggle("color");
+  }}
