@@ -4,22 +4,23 @@ const canvas = document.getElementById("canvas");
 canvas.width = 255; // ancho
 canvas.height = 400;
 
-document.addEventListener("keydown", pulsar, false);
-document.addEventListener("keyup", soltar, false);
-
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
-
+const pausa = document.getElementById("boton_pausa");
+const cont = document.getElementById("boton_play");
+const display = document.getElementById("display");
 
 //-- Coordenadas del objeto
 let x = 0;
 let y = 270;
 
-
-
 //-- Velocidades del objeto
 let velx = 1; // horiz
 let vely = 1; // verti
+let vidas_dispo = 3;
+
+
+
 
 //-- Funcion principal de animacion
 // 1. Actualiza la posicion del elemento
@@ -176,6 +177,27 @@ function update() {
 
 
 update();
+
+
+pausa.onclick = () => {
+  coordenadas = [];
+  coordenadas.push(x);
+  coordenadas.push(y);
+  coordenadas.push(velx);
+  coordenadas.push(vely);
+  velx = 0;
+  vely = 0;
+}
+
+cont.onclick = () => {
+  x = coordenadas[0];
+  y = coordenadas[1];
+  velx = coordenadas[2];
+  vely = coordenadas[3];
+  x = x + velx;
+  y = y + vely;
+  
+}
 
 
 body = document.getElementsByTagName('body')[0]
