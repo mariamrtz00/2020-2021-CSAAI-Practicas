@@ -2,9 +2,15 @@
 Se envían dos paquetes. Los paquetes son de 20ms. El tiempo de encolamiento del 
 paquete 1 es de 2ms. El del paquete 2 de 30ms. ¿Cuál es el tiempo de playout mínimo?
 
+Retardo:
+P1  20 + 2 + 20 = 42 ms
+P2  20 + 30 + 20 = 70ms
+El tiempo de playout mínimo es 20 + 30 = 50 ms  tiempo desde que se TERMINA DE ENVIAR EL PRIMER PAQUETE EN EL EMISOR hasta que se empieza a enviar EL PRIMER PAQUETE EN EL RECEPTOR
+
 
 
 •	Ejercicio 3: Mismo escenario anterior. Los paquetes son de 10ms. El tiempo de 
 encolamiento del paquete 1 es de 5ms y el del segundo de 20ms. ¿Cuál es el playout 
 mínimo? Si tienes que programar la aplicación que se encargue de la reproducción, 
 ¿Qué tiempo real de playout usarías?
+
