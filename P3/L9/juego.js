@@ -98,6 +98,8 @@ function colisiones(){
                     console.log('buenas')
                     vely = - vely // rebote de la pelota
                     ladrillos[i][j].ladrillo_visible = false; // se elimina el brickkk
+                    score = score + 1;
+                    // estoy haciedno todo con vely QUE NO SE ME OLVIDE PONER VELX!!!
                 }
             }
         }
@@ -148,18 +150,21 @@ function update() {
     
         
         // para que rebote en las paredes
-        if (x < 10 || x >= (canvas.width - 10) ) {
+        if (x < 10 || x >= (canvas.width - 10) ) { // le dejamos un poquito de margen para ver el rebote en la pared y q no se nos esconda la pelota
             velx = -velx;
-            console.log('hola03')
+            console.log('rebote horizontal')
 
-        }else if (y < 50) {
+        }else if (y < 10) {
             vely = -vely;
-            console.log('hola02')
+            console.log('rebote vertical')
 
         }else if (y > canvas.height + 10){
-            x = -10;
-            y = -10;
-            console.log('hola1')
+            vidas = vidas -1;
+            x = canvas.width /2;
+            y = canvas.height -10; // con esto se vuelve a colocar la pelota en su sitio
+            vely = 0;
+            velx = 0;
+            console.log('rebote abajo')
 
         }else if ((x > 20) && (x < 20 + 67)){
             if ((y > 563) && (y < 587)){
