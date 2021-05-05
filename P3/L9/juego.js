@@ -40,13 +40,19 @@ var pulsa_bizq = false;
 
 var vidas = 3; // las vidas son un contador decrecieetne
 function pierdevida() {
-    ctx.font =  'arial';
-    ctx.fillStyle = "black";
-    ctx.fillText("Vidas: "+vidas, canvas.width-70, 20);
+    ctx.strokeStyle = 'green';
+    ctx.font = "Arial";
+    ctx.fillText("VIDAS RESTANTES: "+vidas, canvas.width-120, 20);
 }
 
-var score = 0; // la puntuación es un contador creciente
 
+
+var score = 0; // la puntuación es un contador creciente
+function puntuacion(){
+    ctx.strokeStyle = 'green';
+    ctx.font = "Arial";
+    ctx.strokeText("SCORE: " + score , canvas.width-390, 20);
+}
 // a poner los ladrillos sin tener mil líneas de código
 
 const config_ladrillos = {
@@ -165,6 +171,15 @@ function update() {
             vely = 0;
             velx = 0;
             console.log('rebote abajo')
+            if (vidas ==0){
+                console.log("game over");
+            }
+            
+            if (score == (config_ladrillos.filas * config_ladrillos.columnas)){
+                vely = 0;
+                velx = 0;
+                console.log("te pasaste el juego");
+            }
 
         }else if ((x > 20) && (x < 20 + 67)){
             if ((y > 563) && (y < 587)){
@@ -237,7 +252,7 @@ function update() {
 
     ctx.closePath();
    
-    
+    puntuacion();
     pierdevida();
     colisiones();
     
