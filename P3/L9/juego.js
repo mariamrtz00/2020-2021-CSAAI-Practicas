@@ -2,8 +2,8 @@ console.log("Ejecutando JS...");
 const canvas = document.getElementById("canvas");
 
 //-- Definir el tamaño del canvas
-canvas.width = 255; // ancho
-canvas.height = 400;
+canvas.width = 450; // ancho
+canvas.height = 600;
 
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
@@ -16,13 +16,13 @@ var score = 0;
 var vidas = 3;
 
 var x = canvas.width/2;
-var y = canvas.height-20;
+var y = canvas.height-10;
 var x2 = 2;
 var y2 = -2;
 
 //-- Velocidades del objeto
-let velx = 1; // horiz
-let vely = 1; // verti
+let velx = 4; // horiz
+let vely = 4; // verti
 
 // botones
 var play = false;
@@ -115,33 +115,36 @@ function nopulses(){
 // se repite el proceso
 
 function update() {
-  console.log("test");
+    
+    console.log("test");
+    
+        
+        // para que rebote en las paredes
+        if (x < 10 || x >= (canvas.width - 10) ) {
+            velx = -velx;
+            console.log('hola03')
 
-  // para que rebote en las paredes
-  // if (x < 0 || x >= (canvas.width - 20) ) {
-     // velx = -velx;
+        }else if (y < 50) {
+            vely = -vely;
+            console.log('hola02')
 
- // } else if (y < 0) {
-    //  vely = -vely;
+        }else if (y > canvas.height + 10){
+            x = -10;
+            y = -10;
+            console.log('hola1')
 
- // } else if (y > canvas.height + 20){
-  //  x = -10;
-  //  y = -10;
-  //  vidas_dispo = vidas_dispo - 1;
-     //   if (vidas >= 1){
-       //     x = 400; 
-      //     y = 270;
-       //     velx = 0;
-       //     vely = 0;
-       //     x2 = 0;
-       // }else if (vidas == 0){
-        //    document.location.reload();
-       // }
-//}
+        }else if ((x > 20) && (x < 20 + 67)){
+            if ((y > 563) && (y < 587)){
+                vely = -vely;
+                velx = -velx;
+                console.log('hodasf')
+            }
+        }
+    
 
   //-- Actualizar la posición
-  //x = x + velx;
-  //y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
+  x = x + velx;
+  y = y - vely; 
 
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
