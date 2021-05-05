@@ -1,4 +1,3 @@
-
 console.log("Ejecutando JS...");
 const canvas = document.getElementById("canvas");
 
@@ -22,13 +21,17 @@ var x2 = 2;
 var y2 = -2;
 
 //-- Velocidades del objeto
-let velx = 4; // horiz
-let vely = 4; // verti
+let velx = 0; // horiz
+let vely = 5; // verti
 
 // botones
 var play = false;
 var pulsa_bdcha = false;
 var pulsa_bizq = false;
+
+
+
+
 
 // Start
 empezamos.addEventListener("click", () =>{
@@ -36,23 +39,30 @@ empezamos.addEventListener("click", () =>{
 });
 
 // Pausa
-pausa.addEventListener("click", () =>{
-  play = false;
-});
-
+pausa.onclick = () =>{ // esto para en seco, no es lo que quiero
+    velx = 0;
+    vely = 0;
+};
+// emp
+empezamos.onclick = () =>{ // esto para en seco, no es lo que quiero
+    velx = 0;
+    vely = 5;
+};
 
 
 
 // a poner los ladrillos sin tener mil líneas de código
 
 const config_ladrillos = {
-  filas: 6, 
+  filas: 7, 
   columnas: 10, 
-  ancho: 30, 
+  ancho: 32, 
   alto: 15, 
-  padding: 10, 
+  padding: 9, 
   ladrillo_visible: true
 }
+
+
 
 
 // voy a guardar los ladrillos en una matriz
@@ -78,11 +88,12 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
 }
 console.log('a ver si llegamos aqui')
 
-// para mover la pala
-document.addEventListener("keydown", pulsa, false);
-document.addEventListener("keyup", nopulses, false);
 
-function pulsa(){
+// para mover la pala
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(){
     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = true;
 
@@ -98,7 +109,7 @@ function pulsa(){
   }
 }
 
-function nopulses(){
+function keyUpHandler(){
     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = false;
 
@@ -175,19 +186,20 @@ function update() {
 
   
   //dibujar ladrillos
-  for (let i = 0; i < config_ladrillos.filas; i++) {
-      for (let j = 0; j < config_ladrillos.columnas; j++) {
-          // si el ladrillo es visible se pinta
-          if (ladrillos[i][j].ladrillo_visible) {
-              ctx.beginPath();
-                  ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
-                  ctx.fillStyle = 'white'
-                  ctx.fill();
-              ctx.stroke();
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            // si el ladrillo es visible se pinta
+            if (ladrillos[i][j].ladrillo_visible) {
+                ctx.beginPath();
+                    ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
+                    ctx.fillStyle = 'yellow'
+                    ctx.fill();
+                ctx.stroke();
+            }
         }
-      }
-}
+        }
 
+    
   ctx.beginPath();
   // dibujar pelotita
 
@@ -212,3 +224,64 @@ function update() {
 
 update();
 
+function colisionLadrillo(){
+    for(let i = 0; i < config_ladrillos.filas; i++){
+        for (let j = 0; j < config_ladrillos.columnas; j++){
+            if(ladrillos[i][j].ladrillo_visible == true){
+                if(ball.x >= ladrillos[i][j].x &&
+                ball.x <= ladrillos[i][j].x + config_ladrillos.ancho &&
+                ball.y >= ladrillos[i][j].y &&
+                ball.y <= ladrillos[i][j].y + config_ladrillos.alto)
+                {
+                    ball.dy = -ball.dy;
+                    ladrillos[i][j].visible = false;
+                    score = score + 1;
+                    } 
+                
+            }
+        }
+    }
+}
+
+let ball = {
+    x: canvas.width /2,
+    y: canvas.height - 50,
+    dx: 0,
+    dy: 0,
+    radius: 7,
+    draw: function() {
+        ctx.beginPath();
+          ctx.fillStyle = "white";
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+          ctx.closePath();
+        ctx.fill();
+    }
+};
+
+colisionLadrillo();
+window.onkeydown = (e) => {
+    switch (e.keyCode){
+        case 32:
+            velx = 3;
+            vely = 2;
+        case 37:
+            if (x2 <0){
+                x2 = x2 + 10;
+            } else{
+                x2 = x2 - 10;
+            }
+            break;
+        case 39:
+            if (x2 <= canvas.width - 70){
+                x2 = x2 + 10;
+            } else{
+                x2 = x2 - 10;
+            }
+    }
+}
+
+window.onkeyup = (e) => {
+    if (e.keyCode == 37 || e.keyCode == 39){
+        x2 = x2;
+    }
+}
