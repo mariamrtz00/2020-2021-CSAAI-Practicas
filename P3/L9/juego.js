@@ -13,15 +13,12 @@ var empezamos = document.getElementById("boton_start");
 const display = document.getElementById("display");
 
 
-var score = 0;
-var vidas = 3;
-
 var x = canvas.width/2;
 var y = canvas.height-10;
 var x2 = 2;
 var y2 = -2;
 
-//-- Velocidades del objeto
+//-- Velocidad de la pelota, está a 0 hasta que demos al play osea space
 let velx = 0; // horiz
 let vely = 0; // verti
 
@@ -31,22 +28,24 @@ var pulsa_bdcha = false;
 var pulsa_bizq = false;
 
 // Start
-empezamos.addEventListener("click", () =>{
-  play = true;
-});
+//empezamos.addEventListener("click", () =>{
+ // play = true;
+//});
 
 // Pausa
-pausa.addEventListener("click", () =>{
-  play = false;
-});
+//pausa.addEventListener("click", () =>{
+ // play = false;
+//});
 
 
-var vidas = 3;
+var vidas = 3; // las vidas son un contador decrecieetne
 function pierdevida() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Vidas: "+vidas, canvas.width-65, 20);
+    ctx.font =  'arial';
+    ctx.fillStyle = "black";
+    ctx.fillText("Vidas: "+vidas, canvas.width-70, 20);
 }
+
+var score = 0; // la puntuación es un contador creciente
 
 // a poner los ladrillos sin tener mil líneas de código
 
@@ -62,7 +61,10 @@ const config_ladrillos = {
 
 // voy a guardar los ladrillos en una matriz
 const ladrillos = [];
+
 // creo un bucle que va reccoriendo las finlas y columnas y asignando psiciones
+
+
 for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
     ladrillos[i] = [];  // filas
     for (let j =0; j < config_ladrillos.columnas; j++){ // recorre numero de columnas de cada fila
@@ -79,6 +81,28 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
     }
 }
 console.log('a ver si llegamos aqui')
+
+
+
+
+
+function colisiones(){
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            if (ladrillos[i][j].ladrillo_visible == true) {
+                if( x >= ladrillos[i][j].x &&
+                    x <= ladrillos[i][j].x + config_ladrillos.ancho &&
+                    y >= ladrillos[i][j].y &&
+                    y <= ladrillos[i][j].y + config_ladrillos.alto)
+                {
+                    console.log('buenas')
+                    vely = - vely // rebote de la pelota
+                    ladrillos[i][j].ladrillo_visible = false; // se elimina el brickkk
+                }
+            }
+        }
+    }
+}
 
 
 
@@ -109,28 +133,6 @@ function keyUpHandler(e) {
     }
 }
 
-function colisiones() {
-    //dibujar ladrillos
-    for (let i = 0; i < config_ladrillos.filas; i++) {
-        for (let j = 0; j < config_ladrillos.columnas; j++) {
-            console.log('colision')
-            // si el ladrillo es visible se pinta
-            if (ladrillos[i][j].ladrillo_visible) {
-                console.log('colisionn')
-                if ((y >= ladrillos[i][j].y) && (y <= ladrillos[i][j].y )){
-                    console.log('colision5456')
-                    if ((x >= ladrillos[i][j].x) && (x <= ladrillos[i][j].x )){
-
-                        console.log('colision5456')
-                        vely = -vely;
-                        ladrillos[i][j].visible = false;
-                    }
-
-                }
-            }
-        }
-    }
-}
 
 //-- Funcion principal de animacion
 // 1. Actualiza la posicion del elemento
@@ -176,20 +178,21 @@ function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-
-    //dibujar ladrillos
-    for (let i = 0; i < config_ladrillos.filas; i++) {
-        for (let j = 0; j < config_ladrillos.columnas; j++) {
-            // si el ladrillo es visible se pinta
-            if (ladrillos[i][j].ladrillo_visible) {
-                ctx.beginPath();
-                    ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
-                    ctx.fillStyle = 'white'
-                    ctx.fill();
-                ctx.stroke();
+    
+        //dibujar ladrillos
+        for (let i = 0; i < config_ladrillos.filas; i++) {
+            for (let j = 0; j < config_ladrillos.columnas; j++) {
+                // si el ladrillo es visible se pinta
+                if (ladrillos[i][j].ladrillo_visible) {
+                    ctx.beginPath();
+                        ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
+                        ctx.fillStyle = 'black'
+                        ctx.fill();
+                    ctx.stroke();
+                }
+            }
         }
-        }
-    }
+    
 
     ctx.beginPath();
     // dibujar raqueeta
@@ -228,7 +231,8 @@ function update() {
         ctx.fill();
 
     ctx.closePath();
-
+   
+    
     pierdevida();
     colisiones();
     
