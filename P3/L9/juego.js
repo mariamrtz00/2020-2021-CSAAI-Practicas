@@ -8,28 +8,34 @@ canvas.height = 400;
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
 const pausa = document.getElementById("boton_pausa");
-const cont = document.getElementById("boton_play");
+const empezamos = document.getElementById("boton_start");
 const display = document.getElementById("display");
 
-//-- Coordenadas del objeto
-let x = 400;
-let y = 270;
+
+var score = 0;
+var vidas = 3;
+
+var x = canvas.width/2;
+var y = canvas.height-20;
+var x2 = 2;
+var y2 = -2;
 
 //-- Velocidades del objeto
 let velx = 1; // horiz
 let vely = 1; // verti
-let vidas_dispo = 3;
-let x2 = canvas.width/2;
 
-pausa.onclick = () => {
-  coordenadas = [];
-  coordenadas.push(x);
-  coordenadas.push(y);
-  coordenadas.push(velx);
-  coordenadas.push(vely);
-  velx = 0;
-  vely = 0;
-}
+var play = false;
+
+// Start
+empezamos.addEventListener("click", () =>{
+  play = true;
+});
+
+// Pausa
+pausa.addEventListener("click", () =>{
+  play = false;
+});
+
 
 // a poner los ladrillos sin tener mil líneas de código
 const config_ladrillos = {
@@ -41,6 +47,7 @@ const config_ladrillos = {
   visible: true 
 }
 
+// voy a guardar los ladrillos en una matriz
 const ladrillos = []; 
 
 for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
@@ -60,6 +67,7 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
         };
     }
 }
+
 
 
 
@@ -103,6 +111,20 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
+// dibujar ladrillos 
+
+  for (let i = 0; i < config_ladrillos.filas; i++) {
+    for (let j = 0; j < config_ladrillos.columnas; j++) {
+
+      if (ladrillos[i][j].visible) {
+        ctx.beginPath();
+          ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.w, config_ladrillos.h);
+          ctx.fillStyle = 'pink'
+          ctx.fill();
+        ctx.stroke();
+      }
+    }
+  }
 
   ctx.beginPath();
   // raqueeta
