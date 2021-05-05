@@ -25,6 +25,8 @@ let velx = 1; // horiz
 let vely = 1; // verti
 
 var play = false;
+var pulsa_bdcha = false;
+var pulsa_bizq = false;
 
 // Start
 empezamos.addEventListener("click", () =>{
@@ -37,6 +39,8 @@ pausa.addEventListener("click", () =>{
 });
 
 
+
+
 // a poner los ladrillos sin tener mil líneas de código
 const config_ladrillos = {
   filas: 6, 
@@ -44,7 +48,6 @@ const config_ladrillos = {
   ancho: 30, 
   alto: 15, 
   padding: 10, 
-  visible: true 
 }
 
 // voy a guardar los ladrillos en una matriz
@@ -53,7 +56,6 @@ const ladrillos = [];
 for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
     ladrillos[i] = [];  // filas
     for (let j =0; j < config_ladrillos.columnas; j++){ // recorre numero de columnas de cada fila
-
       // calculamos valores para los ladrillos 
         ladrillos[i][j] = { // filas y columnas
 
@@ -62,14 +64,40 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
             w: config_ladrillos.ancho,
             h: config_ladrillos.alto,
             padding: config_ladrillos.padding,
-            visible: config_ladrillos.visible
-
+            
         };
     }
 }
+console.log('a ver si llegamos aqui')
 
+// para mover la pala
+document.addEventListener("keydown", pulsa, false);
+document.addEventListener("keyup", nopulses, false);
 
+function pulsa(){
+    if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
+        pulsa_bdcha = true;
 
+    }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
+        pulsa_bizq = true;
+
+    }else if(e.keyCode == 9) { // en mi ordenador es el intro
+        play = true;
+        x2 = 5;
+        y2 = -5;
+        x = canvas.width/2; // esto va a estar mal porque no le estoy dando posición a la pala
+        y = canvas.height-30;
+  }
+}
+
+function nopulses(){
+    if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
+       pulsa_bdcha = false;
+
+    }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
+        pulsa_bizq = false;
+    }
+}
 
 
 //-- Funcion principal de animacion
