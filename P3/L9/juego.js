@@ -22,8 +22,8 @@ var x2 = 2;
 var y2 = -2;
 
 //-- Velocidades del objeto
-let velx = 4; // horiz
-let vely = 4; // verti
+let velx = 0; // horiz
+let vely = 0; // verti
 
 // botones
 var play = false;
@@ -41,26 +41,28 @@ pausa.addEventListener("click", () =>{
 });
 
 
-
+var vidas = 3;
+function pierdevida() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Vidas: "+vidas, canvas.width-65, 20);
+}
 
 // a poner los ladrillos sin tener mil líneas de código
 
 const config_ladrillos = {
-  filas: 6, 
-  columnas: 10, 
-  ancho: 30, 
-  alto: 15, 
-  padding: 10, 
-  ladrillo_visible: true
+    filas: 6, 
+    columnas: 10, 
+    ancho: 30, 
+    alto: 15, 
+    padding: 10, 
+    ladrillo_visible: true
 }
 
 
 // voy a guardar los ladrillos en una matriz
 const ladrillos = [];
-
 // creo un bucle que va reccoriendo las finlas y columnas y asignando psiciones
-
-
 for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
     ladrillos[i] = [];  // filas
     for (let j =0; j < config_ladrillos.columnas; j++){ // recorre numero de columnas de cada fila
@@ -78,42 +80,65 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
 }
 console.log('a ver si llegamos aqui')
 
-// para mover la pala
-document.addEventListener("keydown", pulsa, false);
-document.addEventListener("keyup", nopulses, false);
 
-function pulsa(){
+
+// para mover la pala
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = true;
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
-        pulsa_bizq = true;
-
-    }else if(e.keyCode == 9) { // en mi ordenador es el intro
-        play = true;
-        x2 = 5;
-        y2 = -5;
-        x = canvas.width/2; // esto va a estar mal porque no le estoy dando posición a la pala
-        y = canvas.height-30;
-  }
+        pulsa_bizq = true;    
+    }
 }
 
-function nopulses(){
-    if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
+function keyUpHandler(e) {
+    if(e.keyCode == 32) { // en mi ordenador es el espacio
+        console.log('intro')
+        vely = 5;
+
+    }else if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = false;
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
         pulsa_bizq = false;
+
     }
 }
 
+function colisiones() {
+    //dibujar ladrillos
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            console.log('colision')
+            // si el ladrillo es visible se pinta
+            if (ladrillos[i][j].ladrillo_visible) {
+                console.log('colisionn')
+                if ((y >= ladrillos[i][j].y) && (y <= ladrillos[i][j].y )){
+                    console.log('colision5456')
+                    if ((x >= ladrillos[i][j].x) && (x <= ladrillos[i][j].x )){
 
+                        console.log('colision5456')
+                        vely = -vely;
+                        ladrillos[i][j].visible = false;
+                    }
+
+                }
+            }
+        }
+    }
+}
 
 //-- Funcion principal de animacion
 // 1. Actualiza la posicion del elemento
 // 2. Borrar el canvas
 // 3. Pintaar en el canvas
 // se repite el proceso
+
+
 
 function update() {
     
@@ -143,70 +168,73 @@ function update() {
         }
     
 
-  //-- Actualizar la posición
-  x = x + velx;
-  y = y - vely; 
+    //-- Actualizar la posición
+    x = x + velx;
+    y = y - vely; 
 
-  //-- 2) Borrar el canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-
+    //-- 2) Borrar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
 
-  ctx.beginPath();
-  // dibujar raqueeta
-      // para ver donde empieza a dibujarse el rectángulo (justo a la mitad lo quiero)
-      var xraq = (canvas.width - 40) / 2;
-      var yraq = (canvas.width - 10)
-      ctx.rect(xraq,yraq, 40, 7); 
-      // 40 y 70 son ancho y altura de la pala
-
-      //-- Color de relleno del rectángulo
-      ctx.fillStyle = 'black';
-      ctx.strokeStyle = 'yellow'; 
-      ctx.lineWidth = 0.2; 
-      //-- Mostrar el relleno
-      ctx.fill();
-      //-- Mostrar el trazo del rectángulo
-      ctx.stroke();
-
-  ctx.closePath();
-
-  
-  //dibujar ladrillos
-  for (let i = 0; i < config_ladrillos.filas; i++) {
-      for (let j = 0; j < config_ladrillos.columnas; j++) {
-          // si el ladrillo es visible se pinta
-          if (ladrillos[i][j].ladrillo_visible) {
-              ctx.beginPath();
-                  ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
-                  ctx.fillStyle = 'white'
-                  ctx.fill();
-              ctx.stroke();
+    //dibujar ladrillos
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            // si el ladrillo es visible se pinta
+            if (ladrillos[i][j].ladrillo_visible) {
+                ctx.beginPath();
+                    ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
+                    ctx.fillStyle = 'white'
+                    ctx.fill();
+                ctx.stroke();
         }
-      }
-}
+        }
+    }
 
-  ctx.beginPath();
-  // dibujar pelotita
+    ctx.beginPath();
+    // dibujar raqueeta
+        // para ver donde empieza a dibujarse el rectángulo (justo a la mitad lo quiero)
+        var xraq = (canvas.width - 40) / 2;
+        var yraq = (canvas.height - 7)
+        ctx.rect(xraq,yraq, 40, 7); 
+        // 40 y 70 son ancho y altura de la pala
 
-      ctx.arc(x, y, 7, 0, 2 * Math.PI); 
-      // radio = 7
-      ctx.strokeStyle = 'green';
-      ctx.lineWidht = 3;
-      ctx.fillStyle = 'blue';
-      ctx.stroke();
-      ctx.fill();
+        //-- Color de relleno del rectángulo
+        ctx.fillStyle = 'black';
+        ctx.strokeStyle = 'yellow'; 
+        ctx.lineWidth = 0.2; 
+        //-- Mostrar el relleno
+        ctx.fill();
+        //-- Mostrar el trazo del rectángulo
+        ctx.stroke();
 
-  ctx.closePath();
+    ctx.closePath();
 
+
+    
 
   
-  //-- 4) Volver a ejecutar update cuando toque
-  requestAnimationFrame(update);
-}
+  
 
+    ctx.beginPath();
+    // dibujar pelotita
+
+        ctx.arc(x, y, 7, 0, 2 * Math.PI); 
+        // radio = 7
+        ctx.strokeStyle = 'green';
+        ctx.lineWidht = 3;
+        ctx.fillStyle = 'blue';
+        ctx.stroke();
+        ctx.fill();
+
+    ctx.closePath();
+
+    pierdevida();
+    colisiones();
+    
+    //-- 4) Volver a ejecutar update cuando toque
+    requestAnimationFrame(update);
+}
 
 
 
