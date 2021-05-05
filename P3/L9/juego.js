@@ -7,8 +7,8 @@ canvas.height = 400;
 
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
-const pausa = document.getElementById("boton_pausa");
-const empezamos = document.getElementById("boton_start");
+var pausa = document.getElementById("boton_pausa");
+var empezamos = document.getElementById("boton_start");
 const display = document.getElementById("display");
 
 
@@ -24,6 +24,7 @@ var y2 = -2;
 let velx = 1; // horiz
 let vely = 1; // verti
 
+// botones
 var play = false;
 var pulsa_bdcha = false;
 var pulsa_bizq = false;
@@ -42,16 +43,22 @@ pausa.addEventListener("click", () =>{
 
 
 // a poner los ladrillos sin tener mil líneas de código
+
 const config_ladrillos = {
   filas: 6, 
   columnas: 10, 
   ancho: 30, 
   alto: 15, 
   padding: 10, 
+  ladrillo_visible: true
 }
 
+
 // voy a guardar los ladrillos en una matriz
-const ladrillos = []; 
+const ladrillos = [];
+
+// creo un bucle que va reccoriendo las finlas y columnas y asignando psiciones
+
 
 for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
     ladrillos[i] = [];  // filas
@@ -61,10 +68,10 @@ for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
 
             x: 25 + (config_ladrillos.ancho + config_ladrillos.padding) * j,
             y: 75 + (config_ladrillos.alto + config_ladrillos.padding) * i,
-            w: config_ladrillos.ancho,
-            h: config_ladrillos.alto,
+            ancho: config_ladrillos.ancho,
+            alto: config_ladrillos.alto,
             padding: config_ladrillos.padding,
-            
+            ladrillo_visible: config_ladrillos.ladrillo_visible
         };
     }
 }
@@ -92,12 +99,13 @@ function pulsa(){
 
 function nopulses(){
     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
-       pulsa_bdcha = false;
+        pulsa_bdcha = false;
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
         pulsa_bizq = false;
     }
 }
+
 
 
 //-- Funcion principal de animacion
@@ -110,86 +118,93 @@ function update() {
   console.log("test");
 
   // para que rebote en las paredes
-  if (x < 0 || x >= (canvas.width - 20) ) {
-      velx = -velx;
+  // if (x < 0 || x >= (canvas.width - 20) ) {
+     // velx = -velx;
 
-  } else if (y < 0) {
-      vely = -vely;
+ // } else if (y < 0) {
+    //  vely = -vely;
 
-  } else if (y > canvas.height + 20){
-    x = -10;
-    y = -10;
-    vidas_dispo = vidas_dispo - 1;
-        if (vidas >= 1){
-            x = 400; 
-            y = 270;
-            velx = 0;
-            vely = 0;
-            x2 = 0;
-        }else if (vidas == 0){
-            document.location.reload();
-        }
-}
+ // } else if (y > canvas.height + 20){
+  //  x = -10;
+  //  y = -10;
+  //  vidas_dispo = vidas_dispo - 1;
+     //   if (vidas >= 1){
+       //     x = 400; 
+      //     y = 270;
+       //     velx = 0;
+       //     vely = 0;
+       //     x2 = 0;
+       // }else if (vidas == 0){
+        //    document.location.reload();
+       // }
+//}
 
   //-- Actualizar la posición
-  x = x + velx;
-  y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
+  //x = x + velx;
+  //y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
 
   //-- 2) Borrar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
-// dibujar ladrillos 
 
+
+
+  ctx.beginPath();
+  // dibujar raqueeta
+      // para ver donde empieza a dibujarse el rectángulo (justo a la mitad lo quiero)
+      var xraq = (canvas.width - 40) / 2;
+      var yraq = (canvas.width - 10)
+      ctx.rect(xraq,yraq, 40, 7); 
+      // 40 y 70 son ancho y altura de la pala
+
+      //-- Color de relleno del rectángulo
+      ctx.fillStyle = 'black';
+      ctx.strokeStyle = 'yellow'; 
+      ctx.lineWidth = 0.2; 
+      //-- Mostrar el relleno
+      ctx.fill();
+      //-- Mostrar el trazo del rectángulo
+      ctx.stroke();
+
+  ctx.closePath();
+
+  
+  //dibujar ladrillos
   for (let i = 0; i < config_ladrillos.filas; i++) {
-    for (let j = 0; j < config_ladrillos.columnas; j++) {
-
-      if (ladrillos[i][j].visible) {
-        ctx.beginPath();
-          ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.w, config_ladrillos.h);
-          ctx.fillStyle = 'pink'
-          ctx.fill();
-        ctx.stroke();
+      for (let j = 0; j < config_ladrillos.columnas; j++) {
+          // si el ladrillo es visible se pinta
+          if (ladrillos[i][j].ladrillo_visible) {
+              ctx.beginPath();
+                  ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
+                  ctx.fillStyle = 'white'
+                  ctx.fill();
+              ctx.stroke();
+        }
       }
-    }
-  }
+}
 
   ctx.beginPath();
-  // raqueeta
+  // dibujar pelotita
 
-    ctx.rect(xraq,yraq, 40, 7); // base para que rebote la pelota
-    // x= 70(donde empieza a dibujarse), y= 350 (el 0,0 está arriba a la izquierda)
-    // grosor =7, largo=40
-
-    //-- Color de relleno del rectángulo
-    ctx.fillStyle = 'black';
-    ctx.strokeStyle = 'yellow'; 
-    ctx.lineWidth = 0.2; 
-    //-- Mostrar el relleno
-    ctx.fill();
-    //-- Mostrar el trazo del rectángulo
-    ctx.stroke();
+      ctx.arc(x, y, 7, 0, 2 * Math.PI); 
+      // radio = 7
+      ctx.strokeStyle = 'green';
+      ctx.lineWidht = 3;
+      ctx.fillStyle = 'blue';
+      ctx.stroke();
+      ctx.fill();
 
   ctx.closePath();
 
 
-
-  ctx.beginPath();
-  // pelotita
-
-    ctx.arc(x, y, 7, 0, 2 * Math.PI); 
-    // radio = 7
-    ctx.strokeStyle = 'green';
-    ctx.lineWidht = 3;
-    ctx.fillStyle = 'blue';
-    ctx.stroke();
-    ctx.fill();
-
-  ctx.closePath();
-
+  
   //-- 4) Volver a ejecutar update cuando toque
   requestAnimationFrame(update);
 }
 
 
+
+
 update();
+
