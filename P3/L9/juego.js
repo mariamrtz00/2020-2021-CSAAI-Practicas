@@ -2,6 +2,11 @@
 console.log("Ejecutando JS...");
 const canvas = document.getElementById("canvas");
 
+const pierdevid = new Audio('pierdevid.mp3');
+const gameover = new Audio('gameover.mp3');
+const ganar = new Audio('aplausos.mp3');
+const rebote = new Audio('rebote.mp3');
+
 //-- Definir el tamaño del canvas
 canvas.width = 450; // ancho
 canvas.height = 600;
@@ -11,6 +16,7 @@ const ctx = canvas.getContext("2d");
 var pausa = document.getElementById("boton_pausa");
 var empezamos = document.getElementById("boton_start");
 const display = document.getElementById("display");
+
 
 
 var x = canvas.width/2;
@@ -40,7 +46,7 @@ var pulsa_bizq = false;
 
 var vidas = 3; // las vidas son un contador decrecieetne
 function pierdevida() {
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = 'black';
     ctx.font = "Arial";
     ctx.fillText("VIDAS RESTANTES: "+vidas, canvas.width-120, 20);
 }
@@ -49,7 +55,7 @@ function pierdevida() {
 
 var score = 0; // la puntuación es un contador creciente
 function puntuacion(){
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = 'black';
     ctx.font = "Arial";
     ctx.strokeText("SCORE: " + score , canvas.width-390, 20);
 }
@@ -121,9 +127,13 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(e) {
     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = true;
+        console.log('harta estoy')
+        x = x + velx;
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
-        pulsa_bizq = true;    
+        pulsa_bizq = true;  
+        console.log('harta estoy')
+        x = x - velx;  
     }
 }
 
@@ -134,9 +144,14 @@ function keyUpHandler(e) {
 
     }else if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = false;
+        console.log('harta estoy')
+        x = x + velx;
+        
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
         pulsa_bizq = false;
+        console.log('harta estoy')
+        x = x - velx;  
 
     }
 }
@@ -153,6 +168,11 @@ function keyUpHandler(e) {
 function update() {
     
     console.log("test");
+
+    vely2 = 0;
+    velx2 = 0;
+    y2 = 350;
+    x2 =canvas.width/2
     
         
         // para que rebote en las paredes
@@ -171,21 +191,34 @@ function update() {
             vely = 0;
             velx = 0;
             console.log('rebote abajo')
+            pierdevid.volume=0.05;
+            pierdevid.play();
+
             if (vidas ==0){
                 console.log("game over");
+                gameover.volume=0.05;
+                gameover.play();
             }
             
             if (score == (config_ladrillos.filas * config_ladrillos.columnas)){
                 vely = 0;
                 velx = 0;
                 console.log("te pasaste el juego");
+                ganar.volume=0.05;
+                ganar.play();
             }
+        }else if (y2 >y && y+10 && x2 < x+100 &&x2 > x ){
+            console.log('raque');
+            vely2 = -vely2;
+
 
         }else if ((x > 20) && (x < 20 + 67)){
             if ((y > 563) && (y < 587)){
                 vely = -vely;
                 velx = -velx;
                 console.log('hodasf')
+                rebote.volume=0.05;
+                rebote.play();
             }
         }
     
@@ -193,6 +226,7 @@ function update() {
     //-- Actualizar la posición
     x = x + velx;
     y = y - vely; 
+    y2 = y2 + vely2;
 
     //-- 2) Borrar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -251,7 +285,9 @@ function update() {
         ctx.fill();
 
     ctx.closePath();
-   
+
+    
+  
     puntuacion();
     pierdevida();
     colisiones();

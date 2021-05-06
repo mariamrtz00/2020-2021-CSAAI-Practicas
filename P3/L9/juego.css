@@ -1,9 +1,9 @@
 
 canvas{
-    background-color: rgb(243, 226, 226);
+    background-color: rgb(100, 76, 204);
     border-style: solid;
     border-width: 5px;
-    border-color: rgb(252, 61, 204);
+    border-color: rgb(51, 212, 59);
     margin-left: 400px;
 }
 body{
@@ -15,7 +15,7 @@ p{
 }
 
 #boton_pausa{
-    background-color: rgb(243, 226, 226);
+    background-color: rgb(105, 69, 235);
     border-radius: 10px;
     font-family: "Regular";
     color: rgb(7, 7, 7);
@@ -24,7 +24,7 @@ p{
     font-size: 20px;
 }
 #boton_play{
-    background-color: rgb(243, 226, 226);
+    background-color: rgb(234, 243, 226);
     border-radius: 10px;
     font-family: "Regular";
     color: rgb(7, 7, 7);
