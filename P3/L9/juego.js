@@ -18,11 +18,12 @@ var empezamos = document.getElementById("boton_start");
 const display = document.getElementById("display");
 
 
-
+var ballRadius = 5; //mantiene el radio del circulo dibujado
 var x = canvas.width/2;
 var y = canvas.height-10;
-var x2 = 2;
-var y2 = -2;
+var dx = 2;
+var dy = -2;
+//let x2 = canvas.width -30
 
 //-- Velocidad de la pelota, está a 0 hasta que demos al play osea space
 let velx = 0; // horiz
@@ -50,6 +51,7 @@ function pierdevida() {
     ctx.font = "Arial";
     ctx.fillText("VIDAS RESTANTES: "+vidas, canvas.width-120, 20);
 }
+
 
 
 
@@ -125,33 +127,35 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-    if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
-        pulsa_bdcha = true;
-        console.log('harta estoy')
-        x = x + velx;
+    
+        if(e.keyCode == 39) { //tecla derecha
+            pulsa_bdcha = true;
+        }
 
-    }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
-        pulsa_bizq = true;  
-        console.log('harta estoy')
-        x = x - velx;  
+        else if(e.keyCode == 37) { //tecla izquierda
+            pulsa_bizq = true;
+
+        }else if(e.keyCode == 32) { // en mi ordenador es el espacio
+        
+        console.log('intro')
+        play = true;
+        vely = 5;
+        y = canvas.height - 30;
+        x = (xraq + 70)/2
     }
+    
 }
 
 function keyUpHandler(e) {
-    if(e.keyCode == 32) { // en mi ordenador es el espacio
-        console.log('intro')
-        vely = 5;
+    
 
-    }else if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
+     if(e.keyCode == 39) { // en mi ordenador es la flecha derecha
         pulsa_bdcha = false;
-        console.log('harta estoy')
-        x = x + velx;
         
 
     }else if(e.keyCode == 37) { // en mi ordenador es la flecha izquierda
         pulsa_bizq = false;
-        console.log('harta estoy')
-        x = x - velx;  
+          
 
     }
 }
@@ -174,7 +178,7 @@ function update() {
     y2 = 350;
     x2 =canvas.width/2
     
-        
+    if (play){
         // para que rebote en las paredes
         if (x < 10 || x >= (canvas.width - 10) ) { // le dejamos un poquito de margen para ver el rebote en la pared y q no se nos esconda la pelota
             velx = -velx;
@@ -183,6 +187,9 @@ function update() {
         }else if (y < 10) {
             vely = -vely;
             console.log('rebote vertical')
+           // rebote.volume=0;
+             //   console.log('no suena')
+               // rebote.play();
 
         }else if (y > canvas.height + 10){
             vidas = vidas -1;
@@ -196,8 +203,9 @@ function update() {
 
             if (vidas ==0){
                 console.log("game over");
-                gameover.volume=0.05;
+                gameover.volume=0.07; 
                 gameover.play();
+                document.location.reload();
             }
             
             if (score == (config_ladrillos.filas * config_ladrillos.columnas)){
@@ -206,6 +214,7 @@ function update() {
                 console.log("te pasaste el juego");
                 ganar.volume=0.05;
                 ganar.play();
+                document.location.reload();  // empezamos de nuevo
             }
         }else if (y2 >y && y+10 && x2 < x+100 &&x2 > x ){
             console.log('raque');
@@ -214,14 +223,15 @@ function update() {
 
         }else if ((x > 20) && (x < 20 + 67)){
             if ((y > 563) && (y < 587)){
+                
                 vely = -vely;
                 velx = -velx;
                 console.log('hodasf')
-                rebote.volume=0.05;
-                rebote.play();
+               // rebote_sound.currentTime = 0; // aqui empieza en 0 el audio
+                
             }
         }
-    
+    }
 
     //-- Actualizar la posición
     x = x + velx;
@@ -266,9 +276,20 @@ function update() {
         ctx.stroke();
 
     ctx.closePath();
-
-
     
+
+    if(pulsa_bdcha){
+        console.log('auqi');
+        xraq += 7;
+    }
+
+    //condiciones para que la pala no se salga del canvas
+    if(pulsa_bdcha && xraq < canvas.width-70) {
+        xraq += 5;
+    }
+    else if(pulsa_bizq && xraq > 0) {
+        xraq -= 5;
+    }
 
   
   
