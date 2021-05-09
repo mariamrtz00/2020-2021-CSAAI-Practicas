@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="Ej-02.js" defer></script>
+    <title>Ejemplo 2</title>
+</head>
+<body>
+    <p>Imagen original</p>
+    <img src="logoURJC.png" id="imagesrc">
+    <p>Imagen manipulada</p>
+    <canvas id="canvas"></canvas> <!-- canvas originalmente vacío -->
+</body>
+</html>
+<!-- la imagen del logo es de 179x 400
+pera ver los pixeles que tenemos en total:
+179(filas) * 400 = 7 mil algo desde el pixel 0 hasta el último/
+cada pixel tiene 4 bites asique lo multiplicamos por 4
+2846400 bytes
+en multiplos de 4 -> rojo
+en multiplos de 4+1 -> verde
+en multipllos de 4+2 -> azul
+en multiplos de 4+3 -> blanco
+-->
