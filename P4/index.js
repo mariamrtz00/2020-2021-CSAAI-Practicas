@@ -91,6 +91,7 @@ function colores(){
 }
 
 btn_gris.onclick = () =>{
+    console.log('escala de grises')
     grises = true;
 
     //-- Obtener la imagen del canvas en pixeles
@@ -98,6 +99,12 @@ btn_gris.onclick = () =>{
 
     //-- Obtener el array con todos los píxeles
     let data = imgData.data
+    
+    for (let i = 0; i < data.length; i+=4) {
+      brillo = (3*data[i] + 4*data[i+1]+ data[i+2])/8
+      data[i] = data[i+1] = data[i+2] = brillo;
+    }
+    
 
     //-- Poner la imagen modificada en el canvas
     ctx.putImageData(imgData, 0, 0);
