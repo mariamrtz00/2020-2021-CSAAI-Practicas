@@ -1,0 +1,8 @@
+en la práctica se piden 2 filtro, 
+el filtro de colores que es lo del umbral rojo, pero con los 3 umbrales
+
+el otro filtro es el de grises 
+aplicando la fórmula
+sin slider, solo es un boton
+
+2. filtrado con una FUNCIÓN DE FILTRADO porque no solo hay 1 colores
