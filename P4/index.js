@@ -1,4 +1,3 @@
-
 console.log("Ejecutando JS....")
 
 //-- Obtener elementos del DOM
@@ -19,6 +18,8 @@ const range_valueB = document.getElementById('range_value_b');
 //-- Botones
 const btn_gris = document.getElementById('grises');
 const btn_origi = document.getElementById('original');
+const negativo = document.getElementById('negativo');
+const sepia = document.getElementById('sepia');
 
 var grises = false; // de primeras la imagene está normal 
 
@@ -118,12 +119,58 @@ btn_origi.onclick = () =>{
     //-- Obtener la imagen del canvas en pixeles
     let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
+    
+    //-- Poner la imagen modificada en el canvas
+    ctx.putImageData(imgData, 0, 0);
+}
+
+
+negativo.onclick = () =>{
+    console.log('imagen en negativo')
+    
+    //-- Obtener la imagen del canvas en pixeles
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
     //-- Obtener el array con todos los píxeles
     let data = imgData.data
+    // recorro 1 a 1 los pixeles de la imagen y cambia el color por el complementario
+    for (let i = 0; i < data.length; i+=4) {
+        // calculamos el valor de cada componente cromático del color complementario
+        // el valor máximo que pueden tomar estos componentes es 255
+        negativoR = 255 - data[i];
+        negativoG = 255 - data[i+1];
+        negativoB = 255 - data[i+2];
+  
+        data[i] = negativoR;
+        data[i+1] = negativoG;
+        data[i+2] = negativoB;
+    }
+    
+
+    //-- Poner la imagen modificada en el canvas
+    ctx.putImageData(imgData, 0, 0);
+}
+
+
+sepia.onclick = () =>{
+  console.log('imagen en sepia')
+
+  //-- Obtener la imagen del canvas en pixeles
+  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  //-- Obtener el array con todos los píxeles
+  let data = imgData.data
+  // recorro 1 a 1 los pixeles de la imagen y cambia el color por el complementario
+  for (let i = 0; i < data.length; i+=4) {
+      var luminosidad = .3 * data[i] + .6 * data[i + 1] + .1 * data[i + 2];
+      data[i] = Math.min(luminosidad + 40, 255); // rojo
+      data[i + 1] = Math.min(luminosidad + 15, 255); // verde	
+      data[i + 2] = luminosidad; // azul
+  }
+  
 
   //-- Poner la imagen modificada en el canvas
   ctx.putImageData(imgData, 0, 0);
 }
-
 
 console.log("Fin...");
