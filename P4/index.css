@@ -1,0 +1,38 @@
+
+.imagenes {
+   
+    border-style: solid;
+    border-width: 7px;
+    border-color: black;
+    background-image: url('rick.jpg');
+  }
+button{
+    background-image: linear-gradient(90deg, #ace0f1 0%, #b3f595 49%, #f0ee9b 80%, #f8aaee 100%);
+    border-radius:7px;
+    align-items:center;
+    justify-content:center;
+    margin: 10px;
+    font-size:3vw;
+}
+
+.sliders{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 30px;
+}
+p {
+    background-color: chartreuse;
+}
+body {
+    background-color: #a8a7a7;
+    font-family: 'Roboto';
+  }
+
+.imagenes{
+    width:auto;
+    height:auto;
+    text-align:center;
+    display: block;
+    margin: 50px;
+    }
