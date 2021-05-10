@@ -1,3 +1,4 @@
+
 console.log("Ejecutando JS....")
 
 //-- Obtener elementos del DOM
@@ -10,16 +11,22 @@ const deslizadorR = document.getElementById('Rdeslizador');
 const deslizadorG = document.getElementById('Gdeslizador');
 const deslizadorB = document.getElementById('Bdeslizador');
 
+
+
 //-- Valor del deslizador
 const range_valueR = document.getElementById('range_value_r');
 const range_valueG = document.getElementById('range_value_g');
 const range_valueB = document.getElementById('range_value_b');
+
+
 
 //-- Botones
 const btn_gris = document.getElementById('grises');
 const btn_origi = document.getElementById('original');
 const negativo = document.getElementById('negativo');
 const sepia = document.getElementById('sepia');
+const reflejo = document.getElementById('reflejo');
+const granulado = document.getElementById('granulado');
 
 var grises = false; // de primeras la imagene está normal 
 
@@ -54,6 +61,8 @@ deslizadorG.oninput = () => {
 deslizadorB.oninput = () => {
     colores();
   }
+
+
 
 //-- Funcion de retrollamada del deslizador  
 function colores(){
@@ -119,7 +128,11 @@ btn_origi.onclick = () =>{
     //-- Obtener la imagen del canvas en pixeles
     let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-    
+    if(reflex == true){ // para volver a original despues de haberla invertido
+      reflejo.onclick();
+      reflex = false;
+    }
+
     //-- Poner la imagen modificada en el canvas
     ctx.putImageData(imgData, 0, 0);
 }
@@ -171,6 +184,29 @@ sepia.onclick = () =>{
 
   //-- Poner la imagen modificada en el canvas
   ctx.putImageData(imgData, 0, 0);
+}
+
+var reflex = false;
+reflejo.onclick = () => {
+    console.log("Imagen reflejada");
+    ctx.translate(2*(img.width)/2,0);
+    ctx.scale(-1,1);
+    ctx.drawImage(img, 0,0);
+    reflex = true;
+}
+
+granulado.onclick = () => {
+    var ruido = 1;
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let data = imgData.data;
+    for (var i = 0; i < data.length; i+=4) {
+        ruido = Math.floor(Math.random() * (100 + 100 + 10) - 150)
+        // cuanto más mayor sea la diferencia (estos numeros) más brillo = blanca se queda la imagen
+        data[i] += ruido;
+        data[i+1] += ruido;
+        data[i+2] += ruido;
+    }
+    ctx.putImageData(imgData, 0, 0);
 }
 
 console.log("Fin...");
