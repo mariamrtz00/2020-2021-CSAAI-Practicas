@@ -1,3 +1,4 @@
+
 console.log("Ejecutando JS....")
 
 //-- Obtener elementos del DOM
@@ -109,5 +110,20 @@ btn_gris.onclick = () =>{
     //-- Poner la imagen modificada en el canvas
     ctx.putImageData(imgData, 0, 0);
 }
+
+btn_origi.onclick = () =>{
+    console.log('imagen original')
+    grises = false;
+    colores();
+    //-- Obtener la imagen del canvas en pixeles
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+    //-- Obtener el array con todos los píxeles
+    let data = imgData.data
+
+  //-- Poner la imagen modificada en el canvas
+  ctx.putImageData(imgData, 0, 0);
+}
+
 
 console.log("Fin...");
