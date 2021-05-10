@@ -1,147 +1,171 @@
 console.log("Ejecutando JS...");
-
 const canvas = document.getElementById("canvas");
-const start = document.getElementById("start");
-const izq = document.getElementById("izquierda");
-const dcha = document.getElementById("derecha");
+
+const pierdevid = new Audio('pierdevid.mp3');
+const ganar = new Audio('aplausos.mp3');
+const rebote = new Audio('rebote.mp3');
+
+var ctx = canvas.getContext("2d");
 
 //-- Definir el tamaño del canvas
-//canvas.width = 255; // ancho
-//canvas.height = 400; // alto
+canvas.width = 450; // ancho
+canvas.height = 600;
 
-//-- Obtener el contexto del canvas
-const ctx = canvas.getContext("2d");
+var radio = 7;
+var x = canvas.width/2;
+var y = canvas.height-10;
 
 
-//-- Coordenadas del objeto
-let x = 0;
-let y = 270;
+//-- Velocidad de la pelota, está a 0 hasta que demos al play osea space
+let velx = 0; // horiz
+let vely = 0; // verti
 
-//-- Velocidad horizontal del objeto
-let velx = 1;
-let vely = 1;
+var score = 0; // la puntuación es un contador creciente
+function puntuacion() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("SCORE: " + score, 8, 25);
+}
 
-//-- Funcion principal de animacion
-function update() 
-{
-    console.log("test");
-  
-    if (x < 0 || x >= (canvas.width - 20) ) {
-        velx = -velx;
-    } 
-    if (y < 0) {
-        vely = -vely;
+var vidas = 3; // las vidas son un contador decrecieetn
+function pierdevida() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("VIDAS RESTANTES: "+vidas, canvas.width-180, 25);
+}
 
+// a poner los ladrillos sin tener mil líneas de código
+const config_ladrillos = {
+    filas: 6, 
+    columnas: 10, 
+    ancho: 30, 
+    alto: 15, 
+    padding: 10, 
+    ladrillo_visible: true
+}
+
+// voy a guardar los ladrillos en una matriz
+const ladrillos = [];
+
+// creo un bucle que va reccoriendo las finlas y columnas y asignando psiciones
+
+for (let i =0; i < config_ladrillos.filas; i++){ // recorre numero de filas
+    ladrillos[i] = [];  // filas
+    for (let j =0; j < config_ladrillos.columnas; j++){ // recorre numero de columnas de cada fila
+      // calculamos valores para los ladrillos 
+        ladrillos[i][j] = { // filas y columnas
+
+            x: 25 + (config_ladrillos.ancho + config_ladrillos.padding) * j,
+            y: 75 + (config_ladrillos.alto + config_ladrillos.padding) * i,
+            ancho: config_ladrillos.ancho,
+            alto: config_ladrillos.alto,
+            padding: config_ladrillos.padding,
+            ladrillo_visible: config_ladrillos.ladrillo_visible
+        };
     }
-    if (y> canvas.height - 20) {
-        x= xraq;
-        y= yraq;
+}
+console.log('a ver si llegamos aqui')
+
+
+function Fladrillos() {
+    //dibujar ladrillos
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            // si el ladrillo es visible se pinta
+            if (ladrillos[i][j].ladrillo_visible) {
+                ctx.beginPath();
+                    ctx.rect(ladrillos[i][j].x, ladrillos[i][j].y, config_ladrillos.ancho, config_ladrillos.alto);
+                    ctx.fillStyle = 'rgb(51, 212, 59)'
+                    ctx.fill();
+                ctx.stroke();
+            }
+        }
     }
-  
+}
 
-
-  //-- Actualizar la posición
-  x = x + velx;
-  y = y - vely; // PARA QUE LA BOLA VAYA HACIA ARRIBA
-
-  //-- 2) Borrar el canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  let xraq = 0;
-  let yraq = 350;
-  ctx.beginPath();
-  //-- Definir un rectangulo de dimensiones 100x50,
-  //-- cuya esquina superior izquierda está en (5,5)
-        ctx.rect(5,5, 20, 10);
-        ctx.rect(30,5, 20, 10);
-        ctx.rect(55,5, 20, 10);
-        ctx.rect(80,5, 20, 10);
-        ctx.rect(105,5, 20, 10);
-        ctx.rect(130,5, 20, 10);
-        ctx.rect(155,5, 20, 10); 
-        ctx.rect(180,5, 20, 10);
-        ctx.rect(205,5, 20, 10); 
-        ctx.rect(230,5, 20, 10);
-
-        ctx.rect(5,20, 20, 10);
-        ctx.rect(30,20, 20, 10);
-        ctx.rect(55,20, 20, 10);
-        ctx.rect(80,20, 20, 10);
-        ctx.rect(105,20, 20, 10);
-        ctx.rect(130,20, 20, 10);
-        ctx.rect(155,20, 20, 10);
-        ctx.rect(180,20, 20, 10);
-        ctx.rect(205,20, 20, 10); 
-        ctx.rect(230,20, 20, 10);
-
-        ctx.rect(5,35, 20, 10);
-        ctx.rect(30,35, 20, 10);
-        ctx.rect(55,35, 20, 10);
-        ctx.rect(80,35, 20, 10);
-        ctx.rect(105,35, 20, 10);
-        ctx.rect(130,35, 20, 10);
-        ctx.rect(155,35, 20, 10);
-        ctx.rect(180,35, 20, 10);
-        ctx.rect(205,35, 20, 10); 
-        ctx.rect(230,35, 20, 10);
-
-        ctx.rect(5,50, 20, 10);
-        ctx.rect(30,50, 20, 10);
-        ctx.rect(55,50, 20, 10);
-        ctx.rect(80,50, 20, 10);
-        ctx.rect(105,50, 20, 10);
-        ctx.rect(130,50, 20, 10);
-        ctx.rect(155,50, 20, 10);
-        ctx.rect(180,50, 20, 10);
-        ctx.rect(205,50, 20, 10); 
-        ctx.rect(230,50, 20, 10);
-
-        ctx.rect(5,65, 20, 10);
-        ctx.rect(30,65, 20, 10);
-        ctx.rect(55,65, 20, 10);
-        ctx.rect(80,65, 20, 10);
-        ctx.rect(105,65, 20, 10);
-        ctx.rect(130,65, 20, 10);
-        ctx.rect(155,65, 20, 10);
-        ctx.rect(180,65, 20, 10);
-        ctx.rect(205,65, 20, 10); 
-        ctx.rect(230,65, 20, 10);
-
-        ctx.rect(5,80, 20, 10);
-        ctx.rect(30,80, 20, 10);
-        ctx.rect(55,80, 20, 10);
-        ctx.rect(80,80, 20, 10);
-        ctx.rect(105,80, 20, 10);
-        ctx.rect(130,80, 20, 10);
-        ctx.rect(155,80, 20, 10);
-        ctx.rect(180,80, 20, 10);
-        ctx.rect(205,80, 20, 10); 
-        ctx.rect(230,80, 20, 10);
-
-        ctx.rect(5,95, 20, 10);
-        ctx.rect(30,95, 20, 10);
-        ctx.rect(55,95, 20, 10);
-        ctx.rect(80,95, 20, 10);
-        ctx.rect(105,95, 20, 10);
-        ctx.rect(130,95, 20, 10);
-        ctx.rect(155,95, 20, 10);
-        ctx.rect(180,95, 20, 10);
-        ctx.rect(205,95, 20, 10); 
-        ctx.rect(230,95, 20, 10);
-        ctx.fillStyle = 'pink'
-        ctx.strokeStyle = 'violet'; 
-        ctx.lineWidth = 2.0; 
-        //-- Mostrar el relleno
-        ctx.fill();
-        //-- Mostrar el trazo del rectángulo
-        ctx.stroke();
-    //ctx.closePath();
-
-    ctx.beginPath();
     
-        ctx.rect(xraq,yraq, 40, 7); // base para que rebote la pelota
-        // x= 70(donde empieza a dibujarse), y= 350 (el 0,0 está arriba a la izquierda)
-        // grosor =7, largo=40
+
+function Fpelotita() {
+    ctx.beginPath();
+        ctx.arc(x, y, radio, 0, 2 * Math.PI); 
+        // radio = 7
+        ctx.strokeStyle = 'green';
+        ctx.lineWidht = 3;
+        ctx.fillStyle = 'black';
+        ctx.stroke();
+        ctx.fill();
+    ctx.closePath();    
+}
+
+
+
+// para leer el teclado
+var pulsa_dcha = false;
+var pulsa_izq = false;
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+   
+    if(e.keyCode == 39) {
+        console.log("pulsando derecha");
+        pulsa_dcha = true;
+    }else if(e.keyCode == 37) {
+        console.log("pulsando izquierda");
+        pulsa_izq = true;
+    }else if(e.keyCode == 32){
+        console.log(" pulsa espacio");
+        velx = 2;
+        vely = 3;}
+
+}
+function keyUpHandler(e) {
+
+    
+    if(e.keyCode == 39) {
+        console.log("suelta derecha");
+        pulsa_dcha = false;
+    }else if(e.keyCode == 37) {
+        console.log("suelta izquierda");
+        pulsa_izq = false;
+    }
+}
+
+function collisionDetection(){
+    for (let i = 0; i < config_ladrillos.filas; i++) {
+        for (let j = 0; j < config_ladrillos.columnas; j++) {
+            if (ladrillos[i][j].ladrillo_visible == true) {
+                if( x >= ladrillos[i][j].x &&
+                    x <= ladrillos[i][j].x + config_ladrillos.ancho &&
+                    y >= ladrillos[i][j].y &&
+                    y <= ladrillos[i][j].y + config_ladrillos.alto)
+                {
+                    console.log('ha detectado el ladrillo')
+                    rebote.volume=0.5;
+                    rebote.play();
+
+                    vely = - vely // rebote de la pelota
+                    ladrillos[i][j].ladrillo_visible = false; // se elimina el brickkk
+                    score = score + 1;
+                    // estoy haciedno todo con vely QUE NO SE ME OLVIDE PONER VELX!!!
+                }
+            }
+        }
+    }
+}
+
+
+
+//dimensiones raqueta
+var alto_raq = 5;
+var ancho_raq = 80;
+var xraq = (canvas.width-ancho_raq)/2; // la raqueta está justo a la mitad del ancho del canvas
+
+function Fraqueta() {
+    ctx.beginPath();
+        ctx.rect(xraq, canvas.height-alto_raq, ancho_raq, alto_raq); 
+        // 40 y 70 son ancho y altura de la pala
 
         //-- Color de relleno del rectángulo
         ctx.fillStyle = 'black';
@@ -149,43 +173,75 @@ function update()
         ctx.lineWidth = 0.2; 
         //-- Mostrar el relleno
         ctx.fill();
-
         //-- Mostrar el trazo del rectángulo
         ctx.stroke();
-    //ctx.closePath();
-
-    ctx.beginPath();
-    // pelotita
-    // FALLO: NO ESTABA PONIENDO X E Y ENTONCES NO SE ACTUALIZA LA PELOTA CON LAS POSICIONES
-
-        ctx.arc(x, y, 7, 0, 2 * Math.PI); 
-        // radio = 7
-
-        ctx.fillStyle = 'blue';
-        
-        ctx.fill();
     ctx.closePath();
-
-
-  //-- 4) Volver a ejecutar update cuando toque
-  requestAnimationFrame(update);
 }
 
 
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    Fpelotita();
+    Fraqueta();
+    Fladrillos();
+    puntuacion();
+    pierdevida();
+    collisionDetection();
+    
+    if (x < 10 || x >= (canvas.width - 10) ) { // le dejamos un poquito de margen para ver el rebote en la pared y q no se nos esconda la pelota
+        velx = -velx;
+        console.log('rebote horizontal')
+        
+    }else if (y < 10) {
+        vely = -vely;
+        console.log('rebote vertical')
+    }
 
+    else if(y + vely > canvas.height-radio) {
+        if(x > xraq && x < xraq +ancho_raq) {
+            vely = -vely;
+            console.log("colision raqueta - pelota");
+        }
+        else {
+            vidas= vidas -1;
+            pierdevid.volume=0.05;
+            pierdevid.play();
 
-
-izq.onclick = () => {
-    console.log('boton izquierda');
-    // no sé como mover la raqueta 
-    xraq = xraq- 1;
+            if (vidas ==0){
+                console.log("game over");
+                document.location.reload();
+            }
+            
+            if (score == (config_ladrillos.filas * config_ladrillos.columnas)){
+                vely = 0;
+                velx = 0;
+                console.log("te pasaste el juego");
+                ganar.volume=0.05;
+                ganar.play();
+                document.location.reload();  // empezamos de nuevo
+            }
+        else{
+            console.log("Mueve bien esa raquetaaa");
+            x = canvas.width/2;
+            y = canvas.height-30;
+            velx = 3;
+            vely = -3;
+            xraq = (canvas.width-ancho_raq)/2;
+        }
+    }
 }
-
-dcha.onclick = () => {
-    console.log("boton deracha");
-    // no sé como mover la raqueta 
-    xraq = xraq+ 1;
+    
+    if(pulsa_dcha && xraq < canvas.width-ancho_raq) {
+        console.log("raqueta a la derecha");
+        xraq += 10; // se mueve más o menos rapidito
+    }
+    else if(pulsa_izq && xraq > 0) {
+        console.log("raqueta a la izquierda");
+        xraq -= 10;
+    }
+    
+    x +=velx;
+    y += vely; // para que empiece hacia arriba deberia estar en -= pero me hace algo raro cuando pierdo vida
+    requestAnimationFrame(update);
 }
-
- // cuando pulse el boton start, empieza el juego 
-start.onclick = update;
+update();

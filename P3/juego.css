@@ -1,7 +1,10 @@
-#canvas {
-    background-image: url('arcade.jpg');
-    background-position: center;
-    border-width: 1px;
-    border-color: black;
-    
+
+canvas{
+    background-color: rgb(246, 245, 247);
+    border-style:groove;
+    border-width: 5px;
+    border-color: rgb(142, 135, 245);
+    margin-left: 400px;
 }
+
+
