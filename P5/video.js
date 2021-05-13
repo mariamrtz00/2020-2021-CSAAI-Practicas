@@ -13,6 +13,11 @@ const video1 = document.getElementById("video1");
 const video2 = document.getElementById("video2");
 const video3 = document.getElementById("video3");
 
+const btn_on = document.getElementById("btn_src_on");
+const btn_off = document.getElementById("btn_src_off");
+
+
+
 
 //-- Establecer las dimensiones de los vídeos
 directo.width=420; 
@@ -35,44 +40,49 @@ directo.poster = imagen; //imagen cuando no se está reproduciendo video
 video1.poster = imagen;
 
 
-btn1.onclick = () => {
-    console.log("Reproduciendo V1");
+//-- Boton de FUENTES-ON
+btn_src_on.onclick = () => {
+ 
+    //-- Establecer la fuente de la cámara 1
+    //activo la cámara, se pone así para estar en remoto
+    // si creo un repositorio, ponerlo en mejoras
     video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
+    video2.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4";
+    video3.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
+
     //-- Reprodeucimos un vídeo, desde el comienzo
     video1.currentTime = 0;
     video1.play();
+  
     //-- Y en silencio...
     video1.muted= true;
-
+  
     //-- En la emisión en directo ponemos la imagen de prueba
     directo.poster = TEST_IMAGE_URL;
+  };
 
-}
 
-btn2.onclick = () => {
-    console.log("Reproduciendo V2");
-    video2.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4"
-    //-- Reprodeucimos un vídeo, desde el comienzo
-    video2.currentTime = 0;
-    video2.play();
-    //-- Y en silencio...
-    video2.muted= true;
+//-- Botón de Selección de la cámara 1
+btn1.onclick = () => { //cuando de a camara 1
+    directo.src = video1.src;
+    directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
+    directo.play();
+    directo.poster=null;
+};
 
-    //-- En la emisión en directo ponemos la imagen de prueba
-    directo.poster = TEST_IMAGE_URL;
+//-- Botón de Selección de la cámara 1
+btn2.onclick = () => { //cuando de a camara 1
+    directo.src = video1.src;
+    directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
+    directo.play();
+    directo.poster=null;
+};
 
-}
 
-btn3.onclick = () => {
-    console.log("Reproduciendo V1");
-    video3.src = "https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4"
-    //-- Reprodeucimos un vídeo, desde el comienzo
-    video3.currentTime = 0;
-    video3.play();
-    //-- Y en silencio...
-    video3.muted= true;
-
-    //-- En la emisión en directo ponemos la imagen de prueba
-    directo.poster = TEST_IMAGE_URL;
-
-}
+//-- Botón de Selección de la cámara 1
+btn3.onclick = () => { //cuando de a camara 1
+    directo.src = video1.src;
+    directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
+    directo.play();
+    directo.poster=null;
+};
