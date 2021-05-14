@@ -52,7 +52,8 @@ play.onclick = () => {
    }
 
 
-
+let automatico = false;
+let bucle = false;
 
 
 //-- Establecer las dimensiones de los vídeos
@@ -100,14 +101,15 @@ btn_on.onclick = () => {
 
     //-- Y en silencio...
     video1.muted= true;
-  
-    
+    video2.muted= true;
+    video3.muted= true;
+    directo.muted = false;
 };
 
-//-- Boton de FUENTES-ON
+//-- Boton de FUENTES-OFF
 btn_off.onclick = () => {
 
-
+    
     directo.poster = imagen; //imagen cuando no se está reproduciendo video
     video1.poster = imagen1;
     video2.poster = imagen2;
@@ -117,7 +119,7 @@ btn_off.onclick = () => {
     video2.src = null;
     video3.src = null;
     directo.src = null; // sin esto no se pone la imagen
-
+   
     
 };
 
