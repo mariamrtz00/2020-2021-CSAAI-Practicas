@@ -21,7 +21,8 @@ const video3 = document.getElementById("video3");
 
 const btn_on = document.getElementById("btn_src_on");
 const btn_off = document.getElementById("btn_src_off");
-
+const loop = document.getElementById("loop");
+const notloop = document.getElementById("notloop");
 
 const video = document.getElementById("directo");
 const play = document.getElementById("play");
@@ -52,8 +53,6 @@ play.onclick = () => {
    }
 
 
-let automatico = false;
-let bucle = false;
 
 
 //-- Establecer las dimensiones de los vídeos
@@ -138,6 +137,8 @@ btn1.onclick = () => { //cuando de a camara 1
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play(); // se reproduce
     directo.poster=null;
+
+    video1.style.border = 'dotted red 3px'
 };
 
 //-- Botón de Selección de la cámara 2
@@ -146,6 +147,8 @@ btn2.onclick = () => { //cuando de a camara 2
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play();
     directo.poster=null;
+
+    video2.style.border = 'dotted red 3px'
 };
 
 
@@ -155,4 +158,32 @@ btn3.onclick = () => { //cuando de a camara 3
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play();
     directo.poster=null;
+
+    video3.style.border = 'dotted red 3px'
 };
+
+
+var bucle = false;
+var fin = 2;
+var inicio =1;
+
+loop.onclick = () => {
+    console.log('bucle');
+    directo.currentTime = 0;
+    bucle = true;
+}
+
+notloop.onclick = () => {
+    console.log('bucle');
+    directo.currentTime = 0;
+    bucle = false;
+}
+
+setInterval(() =>{
+    if(bucle){
+        if (directo.currentTime > 2){
+            directo.currentTime = inicio
+        } else if (directo.currentTime < inicio){
+            directo.currentTime = inicio;
+    }}
+},10);
