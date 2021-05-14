@@ -7,6 +7,7 @@ let directo = document.getElementById("directo"); // lo q retransmito
 const btn1 = document.getElementById("b1");
 const btn2 = document.getElementById("b2");
 const btn3 = document.getElementById("b3");
+const test = document.getElementById("b4");
 
 
 const imagen = "test.jpg";
@@ -20,7 +21,37 @@ const video3 = document.getElementById("video3");
 
 const btn_on = document.getElementById("btn_src_on");
 const btn_off = document.getElementById("btn_src_off");
-const pausa = document.getElementById("pausa");
+
+
+const video = document.getElementById("directo");
+const play = document.getElementById("play");
+const big = document.getElementById("big");
+const small = document.getElementById("small");
+const time = document.getElementById("time2");
+
+play.onclick = () => {
+    if (video.paused)
+      video.play()
+    else {
+      video.pause()
+    }
+   }
+   
+   big.onclick = () => {
+    video.width = 600;
+    video.height = 400;
+   }
+   
+   small.onclick = () => {
+    video.width = 300;
+    video.height = 200;
+   }
+   
+   time.onclick = () => {
+    video.currentTime = 2;
+   }
+
+
 
 
 
@@ -33,8 +64,8 @@ video2.width=200;
 video2.height=100;
 video3.width=200;  
 video3.height=100;
-imagen.width=200;  
-imagen.height=100;
+test.width=200;  
+test.height=100;
 
 
 
@@ -43,6 +74,8 @@ directo.poster = imagen; //imagen cuando no se está reproduciendo video
 video1.poster = imagen1;
 video2.poster = imagen2;
 video3.poster = imagen3;
+test.poster = imagen;
+
 
 
 
@@ -54,7 +87,7 @@ btn_on.onclick = () => {
     video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
     video2.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4";
     video3.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
-
+   
     //-- Reprodeucimos un vídeo, desde el comienzo
     video1.currentTime = 0;
     video1.play();
@@ -79,6 +112,7 @@ btn_off.onclick = () => {
     video1.poster = imagen1;
     video2.poster = imagen2;
     video3.poster = imagen3;
+
     video1.src = null;
     video2.src = null;
     video3.src = null;
@@ -87,13 +121,14 @@ btn_off.onclick = () => {
     
 };
 
-pausa.onclick = () => {
-    if (directo.play()){
-        directo.pause();
-    }
-}
 
-
+//-- Botón de Selección de la imagen test
+test.onclick = () => { //cuando de a camara 1
+    directo.src = video1.src; // muestro en la principal el V1
+    directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
+    directo.play(); // se reproduce
+    directo.poster=null;
+};
 
 //-- Botón de Selección de la cámara 1
 btn1.onclick = () => { //cuando de a camara 1
