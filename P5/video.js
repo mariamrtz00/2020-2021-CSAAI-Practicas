@@ -7,8 +7,10 @@ let directo = document.getElementById("directo"); // lo q retransmito
 const btn1 = document.getElementById("b1");
 const btn2 = document.getElementById("b2");
 const btn3 = document.getElementById("b3");
-const test = document.getElementById("b4");
-
+//const test = document.getElementById("b4");
+const prueba = document.getElementById('b4'); 
+const imgprueba = document.getElementById("imgprueba");
+imgprueba.src = 'test.jpg'
 
 const imagen = "test.jpg";
 const imagen1 = "imagen1.jpg";
@@ -56,16 +58,16 @@ play.onclick = () => {
 
 
 //-- Establecer las dimensiones de los vídeos
-directo.width=420; 
-directo.height=200;
+directo.width=520; 
+directo.height=300;
 video1.width=200;  
 video1.height=100;
 video2.width=200;  
 video2.height=100;
 video3.width=200;  
 video3.height=100;
-test.width=200;  
-test.height=100;
+imgprueba.width=100;  
+imgprueba.height=80;
 
 
 
@@ -74,7 +76,8 @@ directo.poster = imagen; //imagen cuando no se está reproduciendo video
 video1.poster = imagen1;
 video2.poster = imagen2;
 video3.poster = imagen3;
-test.poster = imagen;
+prueba.poster = imgprueba;
+//test.poster = imagen;
 
 
 
@@ -124,12 +127,12 @@ btn_off.onclick = () => {
 
 
 //-- Botón de Selección de la imagen test
-test.onclick = () => { //cuando de a camara 1
-    directo.src = video1.src; // muestro en la principal el V1
-    directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
-    directo.play(); // se reproduce
-    directo.poster=null;
-};
+//test.onclick = () => { //cuando de a camara 1
+  //  directo.src = video1.src; // muestro en la principal el V1
+    //directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
+    //directo.play(); // se reproduce
+    //directo.poster=null;
+//};
 
 //-- Botón de Selección de la cámara 1
 btn1.onclick = () => { //cuando de a camara 1
