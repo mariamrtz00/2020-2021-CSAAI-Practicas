@@ -1,0 +1,30 @@
+
+#derecha{
+    margin-right: 800px;
+    float: right;
+  }
+
+button{
+    width: 80px;
+    height: 50px;
+    margin: 57px;
+    margin-top: 20px;
+    padding: auto;
+    font-family:inherit;
+    border-radius: 15px ;
+    opacity: 1;
+  }
+
+body{
+    background-image: url(fondo.jpg);
+    
+}
+
+#hola{
+    width: 80px;
+    height: 50px;
+    margin: 57px;
+    margin-right: 20px;
+
+    margin-top: 20px;
+}

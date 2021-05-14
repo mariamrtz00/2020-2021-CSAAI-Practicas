@@ -5,17 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="video.js" defer></script>
+    <link rel="stylesheet" href="video.css">
     <title>Ejemplo 1</title>
 </head>
 <body>
-    <h1> REALIZADOR AUDIOVISUAL </h1>
+    <h1> REALIZADOR AUDIOVISUAL</h1>
+    <div id='hola'>
+    <input type="button" value="Fuentes ON" id="btn_src_on"> <br>
+    <input type="button" value="Fuentes OFF" id="btn_src_off"><br>
+    <input type="button" value="LOOP" id="loop"><br>
+    <input type="button" value="OUT LOOP" id="notloop">
+    </div>
     <video id="directo" ></video> <br>
-    
-    <button type="butto" id="play">Play/Stop</button>
-    <button type="butto" id="big">Big</button>
-    <button type="butto" id="small">Small</button>
-    <button type="butto" id="time2">Time 0:2</button><br>
-
+    <div id= 'controles'>
+        <button type="butto" id="play">Play/Stop</button>
+        <button type="butto" id="big">Big</button>
+        <button type="butto" id="small">Small</button>
+        <button type="butto" id="time2">Time 0:2</button><br>
+    </div>
     <video id="video1"></video>
     <video id="video2"></video>
     <video id="video3"></video>
@@ -28,20 +35,15 @@
     <img id = "imagen3">
 
 
-    <br>
+
     <div id="botones">
         <button id = "b1">Interestellar</button>
         <button id = "b2">Charlie Chaplin</button>
         <button id = "b3">Bohemian Rhapsody</button>
         <button id = "b4">TEST</button>
     </div>
-
-    <br><br>
-    <input type="button" value="Fuentes ON" id="btn_src_on">
-    <input type="button" value="Fuentes OFF" id="btn_src_off">
-    <input type="button" value="LOOP" id="loop">
-    <input type="button" value="OUT LOOP" id="notloop">
-
+    
+    
     <br>
     
    
