@@ -87,9 +87,9 @@ prueba.poster = imgprueba;
 btn_on.onclick = () => {
  
     // videos en remoto
-    video1.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente1.mp4";
-    video2.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente2.mp4";
-    video3.src="https://gsyc.urjc.es/jmplaza/csaai/realizador-fuente3.mp4";
+    video3.src="https://github.com/mariamrtz00/Videos-p5-/raw/main/bohe.mp4";
+    video2.src="https://github.com/mariamrtz00/Videos-p5-/raw/main/charlie.mp4";
+    video1.src="https://github.com/mariamrtz00/Videos-p5-/raw/main/Interstellar%20--%20Tr%C3%A1iler%20Teaser%20Oficial%20en%20espa%C3%B1ol%20HD.mp4";
    
     //-- Reprodeucimos un vídeo, desde el comienzo
     video1.currentTime = 0;
