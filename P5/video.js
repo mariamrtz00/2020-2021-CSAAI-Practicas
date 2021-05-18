@@ -9,8 +9,9 @@ const btn2 = document.getElementById("b2");
 const btn3 = document.getElementById("b3");
 //const test = document.getElementById("b4");
 const prueba = document.getElementById('b4'); 
-const imgprueba = document.getElementById("imgprueba");
-imgprueba.src = 'test.jpg'
+const test = document.getElementById("imgprueba");
+//const test = document.getElementById('f');
+imgprueba.src = 'test.jpg';
 
 const imagen = "test.jpg";
 const imagen1 = "imagen1.jpg";
@@ -25,6 +26,7 @@ const btn_on = document.getElementById("btn_src_on");
 const btn_off = document.getElementById("btn_src_off");
 const loop = document.getElementById("loop");
 const notloop = document.getElementById("notloop");
+
 
 const video = document.getElementById("directo");
 const play = document.getElementById("play");
@@ -127,19 +129,17 @@ btn_off.onclick = () => {
 
 
 //-- Botón de Selección de la imagen test
-//test.onclick = () => { //cuando de a camara 1
-  //  directo.src = video1.src; // muestro en la principal el V1
-    //directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
-    //directo.play(); // se reproduce
-    //directo.poster=null;
-//};
+prueba.onclick = () => { // cuando quiera poner la imagen test
+    console.log('imahen de prueba')
+    directo.src = imagen;
+}; 
 
 //-- Botón de Selección de la cámara 1
 btn1.onclick = () => { //cuando de a camara 1
     directo.src = video1.src; // muestro en la principal el V1
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play(); // se reproduce
-    directo.poster=null;
+   // directo.poster=null;
 
     video1.style.border = 'dotted red 3px'
 };
@@ -149,7 +149,7 @@ btn2.onclick = () => { //cuando de a camara 2
     directo.src = video2.src;
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play();
-    directo.poster=null;
+   // directo.poster=null;
 
     video2.style.border = 'dotted red 3px'
 };
@@ -157,10 +157,11 @@ btn2.onclick = () => { //cuando de a camara 2
 
 //-- Botón de Selección de la cámara 3
 btn3.onclick = () => { //cuando de a camara 3
+
     directo.src = video3.src;
     directo.currentTime = video1.currentTime; //el tiempo sea igual (aunq sale con un poco de retraso)
     directo.play();
-    directo.poster=null;
+   // directo.poster=null;
 
     video3.style.border = 'dotted red 3px'
 };
